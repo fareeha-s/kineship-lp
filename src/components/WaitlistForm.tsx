@@ -25,7 +25,7 @@ export default function WaitlistForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          placeholder="enter your email"
           className="w-full px-6 py-4 bg-white/10 rounded-[12px] border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-sage/50 transition-all backdrop-blur-sm"
           required
         />

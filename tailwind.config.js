@@ -7,6 +7,10 @@ export default {
         sage: '#94A187',
         coral: '#FF8C69',
       },
+      fontFamily: {
+        bricolage: ['Bricolage Grotesque', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],
