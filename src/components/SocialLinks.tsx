@@ -10,7 +10,7 @@ const socialLinks = [
 
 export default function SocialLinks() {
   return (
-    <div className="flex gap-6">
+    <div className="flex items-center gap-2">
       {socialLinks.map(({ Icon, href, label }, index) => (
         <motion.a
           key={label}

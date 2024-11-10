@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         sage: '#94A187',
-        coral: '#FF8C69',
+        coral: '#FF6B6B',
       },
       fontFamily: {
         bricolage: ['Bricolage Grotesque', 'sans-serif'],
