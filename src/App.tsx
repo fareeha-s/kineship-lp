@@ -8,10 +8,12 @@ import SocialLinks from './components/SocialLinks';
 import ParticleEffect from './components/ParticleEffect';
 import { AnimatedText } from './components/AnimatedText';
 import { FastAnimatedText } from './components/FastAnimatedText';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   return (
     <div className="relative min-h-screen font-inter overflow-hidden">
+      <CustomCursor />
       <div className="light-rays" />
       
       <main className="relative container mx-auto px-4 py-12 md:py-24">
@@ -24,7 +26,7 @@ function App() {
             <h1 className="font-bricolage text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
               <div style={{ 
                 opacity: 0, 
-                animation: 'slideInFade 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                animation: 'slideInFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards'
               }}>
                 <span className="gradient-text relative inline-block">
                   kineship
@@ -35,7 +37,7 @@ function App() {
             <p className="text-3xl md:text-4xl font-bold text-white mb-8 leading-tight">
               <AnimatedText 
                 text="What if fitness was the foundation of your social life?" 
-                delay={1.5}
+                delay={1.2}
                 type="simple"
               />
             </p>
@@ -44,14 +46,14 @@ function App() {
               <p className="text-white/90">
                 <AnimatedText 
                   text="the kineship app shares your workout calendar with your circles." 
-                  delay={4}
+                  delay={3.4}
                   type="simple"
                 />
                 &nbsp;
                 <span className="font-bold">
                   <AnimatedText 
                     text="build muscle while building bonds 💪✨"
-                    delay={5.5}
+                    delay={4.2}
                     type="fluid"
                   />
                 </span>
@@ -59,15 +61,22 @@ function App() {
               <p className="text-base md:text-lg text-white/80">
                 <AnimatedText 
                   text="from your runs to your reps to your spin/pilates/kickboxing class—" 
-                  delay={7}
+                  delay={4.5}
                   type="simple"
                   highlightWords={['runs', 'reps', 'spin/pilates/kickboxing', 'class']}
                 />
                 <AnimatedText 
-                  text="you're already going, turn your schedule into an invite" 
-                  delay={7.5}
+                  text="you're already going, " 
+                  delay={4.7}
                   type="simple"
                 />
+                <span className="shine-once">
+                  <AnimatedText 
+                    text="turn your schedule into an invite" 
+                    delay={4.7}
+                    type="simple"
+                  />
+                </span>
               </p>
             </div>
             
@@ -75,7 +84,7 @@ function App() {
               <div style={{ 
                 opacity: 0, 
                 animation: 'fadeInSimple 2.5s ease forwards',
-                animationDelay: '9s'
+                animationDelay: '6.5s'
               }}>
                 <WaitlistForm />
               </div>
@@ -83,7 +92,7 @@ function App() {
               <div style={{ 
                 opacity: 0, 
                 animation: 'fadeInSimple 2.5s ease forwards',
-                animationDelay: '9.2s'
+                animationDelay: '6.7s'
               }}>
                 <div className="flex flex-col items-center lg:items-start gap-4">
                   <p className="text-white/60 lowercase">join our community</p>

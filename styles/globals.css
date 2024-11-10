@@ -1,0 +1,4 @@
+/* Make sure cursor-none applies to all interactive elements */
+a, button, [role="button"] {
+  cursor: none;
+} 
