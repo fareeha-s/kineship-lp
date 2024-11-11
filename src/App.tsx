@@ -17,13 +17,26 @@ function App() {
       <div className="light-rays" />
       
       <main className="relative container mx-auto px-4 py-12 md:py-24">
+        <h1 className="block lg:hidden font-bricolage text-6xl md:text-7xl font-bold mb-8 tracking-tight text-center">
+          <div style={{ 
+            opacity: 0, 
+            animation: 'slideInFade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+            willChange: 'transform',
+            backfaceVisibility: 'hidden'
+          }}>
+            <span className="gradient-text relative inline-block">
+              kineship
+            </span>
+          </div>
+        </h1>
+
         <div className="flex flex-col lg:flex-row-reverse items-center justify-center gap-12 lg:gap-24">
           <div className="flex-1 flex justify-center items-center max-w-lg">
             <AppScreenshots />
           </div>
           
           <div className="flex-1 text-center lg:text-left max-w-2xl">
-            <h1 className="font-bricolage text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
+            <h1 className="hidden lg:block font-bricolage text-8xl font-bold mb-8 tracking-tight">
               <div style={{ 
                 opacity: 0, 
                 animation: 'slideInFade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
