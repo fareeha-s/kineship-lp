@@ -50,13 +50,15 @@ export default function SocialLinks({ onEthosClick, className }: SocialLinksProp
           whileTap={{ scale: 0.95 }}
         >
           {link.type === 'text' ? (
-            <button
+            <motion.button
               onClick={onEthosClick}
-              className="text-white/70 hover:text-white transition-colors font-serif italic text-lg ml-2"
+              className="text-white/70 hover:text-white transition-colors font-serif italic text-lg ml-2 animate-glow"
               aria-label={link.label}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               {link.content}
-            </button>
+            </motion.button>
           ) : (
             <a
               href={link.href}
