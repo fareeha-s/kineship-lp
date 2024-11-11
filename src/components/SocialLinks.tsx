@@ -1,8 +1,18 @@
-import React from 'react';
-import { Linkedin, Mail } from 'lucide-react';
+import { Linkedin, Mail, LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const socialLinks = [
+type SocialLink = {
+  type: 'link';
+  Icon: LucideIcon;
+  href: string;
+  label: string;
+} | {
+  type: 'text';
+  content: string;
+  label: string;
+};
+
+const socialLinks: SocialLink[] = [
   { 
     type: 'link',
     Icon: Mail, 
@@ -48,7 +58,7 @@ export default function SocialLinks({ onEthosClick }: { onEthosClick: () => void
               className="text-white/70 hover:text-white transition-colors"
               aria-label={link.label}
             >
-              <link.Icon className="w-6 h-6" />
+              <link.Icon size={24} />
             </a>
           )}
         </motion.div>

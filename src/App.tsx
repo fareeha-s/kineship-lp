@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '@fontsource/bricolage-grotesque';
 import '@fontsource/inter';
-import { gsap } from 'gsap'; // Keep the GSAP import for later use
 import WaitlistForm from './components/WaitlistForm';
 import AppScreenshots from './components/AppScreenshots';
 import SocialLinks from './components/SocialLinks';
-import ParticleEffect from './components/ParticleEffect';
 import { AnimatedText } from './components/AnimatedText';
-import { FastAnimatedText } from './components/FastAnimatedText';
 import CustomCursor from './components/CustomCursor';
 import Ethos from './components/Ethos';
 

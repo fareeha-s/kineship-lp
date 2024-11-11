@@ -34,7 +34,6 @@ export default function CustomCursor() {
     };
 
     const updatePhysics = () => {
-      // Skip physics update if window is not focused
       if (!isWindowFocused.current) {
         lastTime.current = performance.now();
         requestAnimationFrame(updatePhysics);
@@ -50,32 +49,27 @@ export default function CustomCursor() {
       const dy = mouse.current.y - position.current.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // If shadow is too far from mouse, reset it to mouse position
-      if (distance > 100) { // Reduced from 200 to 100
-        // Smoothly reset position
+      // Increased distance threshold with smoother reset
+      if (distance > 200) { // Increased from 100 to 200
         position.current = {
-          x: mouse.current.x - (dx * 0.1), // Move 90% of the way there
-          y: mouse.current.y - (dy * 0.1)
+          x: mouse.current.x - (dx * 0.3), // More gradual catch-up
+          y: mouse.current.y - (dy * 0.3)
         };
         velocity.current = { x: 0, y: 0 };
         requestAnimationFrame(updatePhysics);
         return;
       }
 
-      // Slightly increased but maintains relationship
-      const proximityMultiplier = Math.max(1, 60 / (distance + 1));
+      // Spring physics with progressive stiffness
+      const baseStiffness = 80; // Reduced from 120 to allow more "loose" feel
+      const stiffness = baseStiffness * (1 + Math.pow(distance / 150, 1.5)); // More dramatic curve
+      const damping = 6; // Reduced damping to allow more movement
+      const mass = 1;
 
-      // Maintain the original proportions but increase overall responsiveness
-      const baseStiffness = 150; // Careful increase from 120
-      const stiffness = baseStiffness * proximityMultiplier;
-      const damping = 8 + (proximityMultiplier * 2); // Keeping original relationship
-      const mass = 1; // Keeping original mass for stability
+      // Calculate spring force
+      const springX = dx * stiffness;
+      const springY = dy * stiffness;
 
-      // Calculate spring force with proximity effect
-      const springX = (dx * stiffness);
-      const springY = (dy * stiffness);
-
-      // Apply forces
       const ax = springX / mass;
       const ay = springY / mass;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import screen1 from '../assets/appscreens/screen-1.svg';
 import screen2 from '../assets/appscreens/screen-2.svg';
