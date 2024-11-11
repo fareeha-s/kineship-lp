@@ -15,7 +15,16 @@ export default function CustomCursor() {
   const velocity = useRef<Point>({ x: 0, y: 0 });
   const lastTime = useRef<number>(performance.now());
 
+  // Move the mobile check inside useEffect
   useEffect(() => {
+    const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+    if (isMobileOrTablet) {
+      return; // Exit early if mobile device
+    }
+
     const updateMouse = (e: MouseEvent) => {
       // Only update if the coordinates are valid numbers
       if (!isNaN(e.clientX) && !isNaN(e.clientY)) {
@@ -90,7 +99,7 @@ export default function CustomCursor() {
       {/* Main cursor */}
       <div 
         ref={cursorRef}
-        className="fixed pointer-events-none z-[100] top-0 left-0 -ml-[12px] -mt-[12px]"
+        className="fixed pointer-events-none z-[100] top-0 left-0 -ml-[12px] -mt-[12px] custom-cursor-main"
       >
         <div className="relative text-[#FF6B7A] text-[24px] italic opacity-90">
           ✦
@@ -100,7 +109,7 @@ export default function CustomCursor() {
       {/* Shadow cursor */}
       <div 
         ref={shadowRef}
-        className="fixed pointer-events-none z-[99] top-0 left-0 -ml-[16px] -mt-[16px]"
+        className="fixed pointer-events-none z-[99] top-0 left-0 -ml-[16px] -mt-[16px] custom-cursor-shadow"
       >
         <div className="text-white text-[32px] italic opacity-70">
           ✦

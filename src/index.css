@@ -180,4 +180,11 @@
   a, button, [role="button"], input, select, textarea {
     cursor: none;
   }
+
+  @media (hover: none) and (pointer: coarse) {
+    .custom-cursor-main,
+    .custom-cursor-shadow {
+      display: none;
+    }
+  }
 }

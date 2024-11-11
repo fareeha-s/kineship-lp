@@ -60,7 +60,7 @@ function App() {
                   />
                 </span>
               </p>
-              <p className="text-base md:text-lg text-white/80">
+              <p className="text-lg md:text-base text-white/80">
                 <AnimatedText 
                   text="from your runs to your reps to your spin/pilates/kickboxing class—" 
                   delay={4.5}
