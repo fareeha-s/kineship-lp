@@ -26,7 +26,9 @@ function App() {
             <h1 className="font-bricolage text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
               <div style={{ 
                 opacity: 0, 
-                animation: 'slideInFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                animation: 'slideInFade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                willChange: 'transform',
+                backfaceVisibility: 'hidden'
               }}>
                 <span className="gradient-text relative inline-block">
                   kineship
@@ -80,7 +82,7 @@ function App() {
               </p>
             </div>
             
-            <div className="mt-6 space-y-8 text-center">
+            <div className="mt-6 space-y-4 text-center">
               <div style={{ 
                 opacity: 0, 
                 animation: 'fadeInSimple 2.5s ease forwards',
@@ -95,7 +97,10 @@ function App() {
                 animationDelay: '6.7s'
               }}>
                 <div className="flex flex-col items-center lg:items-start gap-4">
-                  <SocialLinks onEthosClick={() => setIsEthosOpen(true)} />
+                  <SocialLinks 
+                    onEthosClick={() => setIsEthosOpen(true)} 
+                    className="relative z-50"
+                  />
                 </div>
               </div>
             </div>

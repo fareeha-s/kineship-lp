@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Send } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState('');
@@ -37,7 +37,7 @@ export default function WaitlistForm() {
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="w-full max-w-md mx-auto lg:mx-0"
+      className="w-full max-w-xs mx-auto lg:mx-0 -mb-2"
     >
       <div className="relative group">
         <input
@@ -45,17 +45,21 @@ export default function WaitlistForm() {
           value={status === 'success' ? 'thanks for joining our waitlist!' : email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="enter your email"
-          className="w-full px-6 py-4 bg-white/10 rounded-[12px] border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-sage/50 transition-all backdrop-blur-sm"
+          className="w-full px-5 py-2.5 bg-white/5 rounded-[12px] border border-white/10 
+            text-white placeholder-white/40 focus:outline-none focus:ring-2 
+            focus:ring-sage/50 transition-all backdrop-blur-sm
+            [&:-webkit-autofill]:!text-white
+            [&:-webkit-autofill]:shadow-[0_0_0_30px_rgb(59_130_246_/_0.15)_inset]"
           required
           disabled={status === 'loading' || status === 'success'}
-          style={{ color: status === 'success' ? '#6ee7b7' : 'white' }}
+          style={{ color: status === 'success' ? '#D1E1FD' : 'white' }}
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-sage to-coral p-3 rounded-[8px] hover:opacity-90 transition-all duration-300 hover:scale-105 disabled:opacity-50"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-sage to-coral p-2 rounded-[8px] hover:opacity-90 transition-all duration-300 hover:scale-105 disabled:opacity-50"
           disabled={status === 'loading' || status === 'success'}
         >
-          <Send className="w-5 h-5 text-white" />
+          <ArrowRight className="w-4 h-4 text-white" />
         </button>
       </div>
     </form>

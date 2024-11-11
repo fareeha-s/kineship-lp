@@ -24,6 +24,21 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
     }
   }, [isOpen])
 
+  // Add new useEffect for click detection
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const modalContent = document.querySelector('.modal-content');
+      const clickedElement = event.target as HTMLElement;
+      
+      if (modalContent && !modalContent.contains(clickedElement) && isOpen) {
+        onClose();
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen, onClose]);
+
   // Add this near the top of your component
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -64,7 +79,6 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
             className="fixed inset-0 bg-black/70"
           />
           
@@ -90,7 +104,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 stiffness: 300,
                 damping: 30 
               }}
-              className="relative mx-auto lg:ml-[8%] lg:mt-48 mb-8 w-[90vw] lg:w-[45vw] max-w-2xl z-[70]
+              className="modal-content relative mx-auto lg:ml-[8%] lg:mt-60 mb-8 w-[90vw] lg:w-[45vw] max-w-2xl z-[70]
                        bg-black/10 backdrop-blur-[12px] rounded-3xl p-8 md:p-10
                        border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_48px_rgba(0,0,0,0.3)]
                        font-inter"
@@ -248,12 +262,18 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
               <button
                 onClick={onClose}
                 className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center
-                         rounded-full bg-white/10 hover:bg-white/20 
-                         transition-all duration-200 ease-in-out"
+                         rounded-full bg-white/5 hover:bg-white/10 
+                         transition-all duration-200 ease-in-out
+                         opacity-40 hover:opacity-70"
                 aria-label="close"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 1L13 13M1 13L13 1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                  <path 
+                    d="M1 1L13 13M1 13L13 1" 
+                    stroke="white" 
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
             </motion.div>

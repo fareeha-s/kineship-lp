@@ -14,7 +14,6 @@ export default function CustomCursor() {
   const position = useRef<Point>({ x: 0, y: 0 });
   const velocity = useRef<Point>({ x: 0, y: 0 });
   const lastTime = useRef<number>(performance.now());
-  const isWindowFocused = useRef<boolean>(true);
 
   useEffect(() => {
     const updateMouse = (e: MouseEvent) => {
@@ -24,22 +23,7 @@ export default function CustomCursor() {
       }
     };
 
-    // Add focus/blur handlers
-    const handleFocus = () => {
-      isWindowFocused.current = true;
-    };
-
-    const handleBlur = () => {
-      isWindowFocused.current = false;
-    };
-
     const updatePhysics = () => {
-      if (!isWindowFocused.current) {
-        lastTime.current = performance.now();
-        requestAnimationFrame(updatePhysics);
-        return;
-      }
-
       const now = performance.now();
       const deltaTime = Math.min((now - lastTime.current) / 1000, 0.1);
       lastTime.current = now;
@@ -93,14 +77,10 @@ export default function CustomCursor() {
     };
 
     window.addEventListener('mousemove', updateMouse);
-    window.addEventListener('focus', handleFocus);
-    window.addEventListener('blur', handleBlur);
     const animationFrame = requestAnimationFrame(updatePhysics);
 
     return () => {
       window.removeEventListener('mousemove', updateMouse);
-      window.removeEventListener('focus', handleFocus);
-      window.removeEventListener('blur', handleBlur);
       cancelAnimationFrame(animationFrame);
     };
   }, []);

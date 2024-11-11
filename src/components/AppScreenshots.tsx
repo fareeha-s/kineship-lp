@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import screen1 from '../assets/appscreens/screen-1.svg';
 import screen2 from '../assets/appscreens/screen-2.svg';
 import screen3 from '../assets/appscreens/screen-3-test.svg';
-import screen4 from '../assets/appscreens/screen-4.svg';
+import screen4 from '../assets/appscreens/screen-4-funsies.svg';
 
 const screenshots = [screen1, screen2, screen3, screen4];
 

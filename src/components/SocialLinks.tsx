@@ -1,4 +1,4 @@
-import { Linkedin, Mail, LucideIcon } from 'lucide-react';
+import { Linkedin, Send, LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 type SocialLink = {
@@ -14,27 +14,32 @@ type SocialLink = {
 
 const socialLinks: SocialLink[] = [
   { 
-    type: 'link',
-    Icon: Mail, 
-    href: 'mailto:hello@kineship.com', 
-    label: 'Email' 
-  },
-  { 
-    type: 'link',
-    Icon: Linkedin, 
-    href: 'https://linkedin.com/company/kineship', 
-    label: 'LinkedIn' 
-  },
-  { 
     type: 'text',
     content: 'ethos',
     label: 'Ethos'
+  },
+  { 
+    type: 'link',
+    Icon: Linkedin,
+    href: 'https://linkedin.com/company/kineship',
+    label: 'LinkedIn'
+  },
+  { 
+    type: 'link',
+    Icon: Send,
+    href: 'mailto:hello@kineship.com',
+    label: 'Email'
   }
 ];
 
-export default function SocialLinks({ onEthosClick }: { onEthosClick: () => void }) {
+interface SocialLinksProps {
+  onEthosClick: () => void;
+  className?: string;
+}
+
+export default function SocialLinks({ onEthosClick, className }: SocialLinksProps) {
   return (
-    <div className="flex items-center gap-4">
+    <div className={`flex items-center [&>*:not(:first-child)]:ml-2 [&>*:first-child]:mr-6 ${className}`}>
       {socialLinks.map((link, index) => (
         <motion.div
           key={link.label}
