@@ -99,7 +99,7 @@ export default function CustomCursor() {
       {/* Main cursor */}
       <div 
         ref={cursorRef}
-        className="fixed pointer-events-none z-[100] top-0 left-0 -ml-[12px] -mt-[12px] custom-cursor-main"
+        className="fixed pointer-events-none z-[999] top-0 left-0 -ml-[12px] -mt-[12px] custom-cursor-main"
       >
         <div className="relative text-[#FF6B7A] text-[24px] italic opacity-90">
           ✦
@@ -109,7 +109,7 @@ export default function CustomCursor() {
       {/* Shadow cursor */}
       <div 
         ref={shadowRef}
-        className="fixed pointer-events-none z-[99] top-0 left-0 -ml-[16px] -mt-[16px] custom-cursor-shadow"
+        className="fixed pointer-events-none z-[998] top-0 left-0 -ml-[16px] -mt-[16px] custom-cursor-shadow"
       >
         <div className="text-white text-[32px] italic opacity-70">
           ✦
