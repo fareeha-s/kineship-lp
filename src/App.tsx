@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '@fontsource/bricolage-grotesque';
 import '@fontsource/inter';
 import { gsap } from 'gsap'; // Keep the GSAP import for later use
@@ -9,8 +9,11 @@ import ParticleEffect from './components/ParticleEffect';
 import { AnimatedText } from './components/AnimatedText';
 import { FastAnimatedText } from './components/FastAnimatedText';
 import CustomCursor from './components/CustomCursor';
+import Ethos from './components/Ethos';
 
 function App() {
+  const [isEthosOpen, setIsEthosOpen] = useState(false);
+
   return (
     <div className="relative min-h-screen font-inter overflow-hidden">
       <CustomCursor />
@@ -95,14 +98,18 @@ function App() {
                 animationDelay: '6.7s'
               }}>
                 <div className="flex flex-col items-center lg:items-start gap-4">
-                  <p className="text-white/60 lowercase">join our community</p>
-                  <SocialLinks />
+                  <SocialLinks onEthosClick={() => setIsEthosOpen(true)} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </main>
+      
+      <Ethos 
+        isOpen={isEthosOpen}
+        onClose={() => setIsEthosOpen(false)}
+      />
     </div>
   );
 }

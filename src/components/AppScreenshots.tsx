@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import screen1 from '../assets/appscreens/screen-1.svg';
+import screen2 from '../assets/appscreens/screen-2.svg';
+import screen3 from '../assets/appscreens/screen-3-test.svg';
+import screen4 from '../assets/appscreens/screen-4.svg';
 
-const screenshots = [
-  'https://images.unsplash.com/photo-1662695090713-84d14fb0b5ea?w=500&q=80',
-  'https://images.unsplash.com/photo-1662695090429-b60d69d05af9?w=500&q=80',
-  'https://images.unsplash.com/photo-1662695090654-dd4d9d02da69?w=500&q=80',
-  'https://images.unsplash.com/photo-1662695090481-8e0d0508c03b?w=500&q=80',
-];
+const screenshots = [screen1, screen2, screen3, screen4];
 
 export default function AppScreenshots() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,25 +13,37 @@ export default function AppScreenshots() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((current) => (current + 1) % screenshots.length);
-    }, 5000);
+    }, 4000); // Set interval timing to 4 seconds for consistency
+
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="relative w-[300px] h-[600px]">
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-[20px] pointer-events-none" />
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={currentIndex}
-          src={screenshots[currentIndex]}
-          alt={`App Screenshot ${currentIndex + 1}`}
-          className="absolute w-full h-full object-cover rounded-[20px] shadow-2xl"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        />
-      </AnimatePresence>
+    <div className="relative [transform:translateZ(0)]">
+      <img 
+        src={screenshots[0]} 
+        alt="" 
+        className="invisible"
+        aria-hidden="true"
+        style={{ imageRendering: 'crisp-edges' }}
+      />
+      
+      <div className="absolute top-0 left-0 right-0">
+        <AnimatePresence>
+          <motion.img
+            key={currentIndex}
+            src={screenshots[currentIndex]}
+            alt={`App Screenshot ${currentIndex + 1}`}
+            className="rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center"
+            style={{ imageRendering: 'crisp-edges' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }} // Consistent timing
+          />
+        </AnimatePresence>
+      </div>
+
       <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
         {screenshots.map((_, index) => (
           <div

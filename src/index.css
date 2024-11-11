@@ -161,4 +161,19 @@
     color: white;
     animation: singleShine 2s forwards;
   }
+
+  /* Add this inside your @layer base */
+  a, button, [role="button"] {
+    cursor: none;
+  }
+
+  /* Add this to hide the default cursor across the site */
+  html, body {
+    cursor: none;
+  }
+
+  /* Add this to ensure cursor shows on interactive elements */
+  a, button, [role="button"], input, select, textarea {
+    cursor: none;
+  }
 }
