@@ -8,28 +8,41 @@ interface AnimatedTextProps {
 export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords }: AnimatedTextProps) => {
   const words = text.split(' ');
   
-  // Special case for the question - removed iOS letter spacing adjustment
+  // Special case for the question
   if (text === "What if fitness was the foundation of your social life?") {
+    const wordGroups = [
+      ["What", "if", "fitness"],
+      ["was", "the", "foundation"],
+      ["of", "your", "social", "life?"]
+    ];
+
+    let totalWordIndex = 0;
+
     return (
       <span className="inline-flex flex-wrap justify-center lg:justify-start w-full">
-        {words.map((word, wordIndex) => (
-          <span key={wordIndex} className="inline-flex mr-[0.25em] whitespace-nowrap" style={{ 
-            wordBreak: 'keep-all'
-          }}>
-            {word.split('').map((letter, letterIndex) => (
-              <span
-                key={letterIndex}
-                className="inline-block"
-                style={{
-                  opacity: 0,
-                  animation: type === 'fluid' 
-                    ? `fadeInFluid 6s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 120) + (letterIndex * 25)}ms forwards`
-                    : `fadeInSimple 6s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 120) + (letterIndex * 25)}ms forwards`
-                }}
-              >
-                {letter}
-              </span>
-            ))}
+        {wordGroups.map((group) => (
+          <span key={totalWordIndex} className="flex lg:inline-flex w-full lg:w-auto justify-center lg:justify-start">
+            {group.map((word) => {
+              const currentWordIndex = totalWordIndex++;
+              return (
+                <span key={currentWordIndex} className="inline-flex mr-[0.25em] whitespace-nowrap" style={{ 
+                  wordBreak: 'keep-all'
+                }}>
+                  {word.split('').map((letter, letterIndex) => (
+                    <span
+                      key={letterIndex}
+                      className="inline-block"
+                      style={{
+                        opacity: 0,
+                        animation: `fadeInSimple 6s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (currentWordIndex * 120) + (letterIndex * 25)}ms forwards`
+                      }}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </span>
+              );
+            })}
           </span>
         ))}
       </span>
