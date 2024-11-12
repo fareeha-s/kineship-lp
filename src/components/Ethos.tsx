@@ -104,7 +104,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 stiffness: 300,
                 damping: 30 
               }}
-              className="modal-content relative mx-auto lg:ml-[8%] lg:mt-60 mb-8 w-[90vw] lg:w-[45vw] max-w-2xl z-[70]
+              className="modal-content relative mx-auto lg:ml-[8%] lg:mt-[35vh] mb-8 w-[90vw] lg:w-[45vw] max-w-2xl z-[70]
                        bg-black/10 backdrop-blur-[12px] rounded-3xl p-8 md:p-10
                        border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_48px_rgba(0,0,0,0.3)]
                        font-inter"
@@ -134,7 +134,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                   >
                     {currentSlide === 0 && "we believe simple, everyday rhythms can unite us."}
                     {currentSlide === 1 && "guided by longevity science,"}
-                    {currentSlide === 2 && "a world where social brings us energy, not exhaustion."}
+                    {currentSlide === 2 && "a world where social brings energy, not exhaustion."}
                   </motion.p>
                   
                   <motion.div 
