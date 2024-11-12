@@ -199,6 +199,14 @@
       background: none;
       -webkit-text-fill-color: initial;
     }
+
+    @media (max-width: 768px) {
+      .gradient-text {
+        text-shadow: 
+          0 0 1px rgba(255, 255, 255, 0.9),
+          0 0 5px rgba(255, 127, 105, 0.35); /* Reduced spread from 10px to 5px for mobile */
+      }
+    }
   }
 
   /* Add mobile-specific timing */
