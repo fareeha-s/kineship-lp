@@ -10,19 +10,21 @@ interface AnimatedTextProps {
 export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords }: AnimatedTextProps) => {
   const words = text.split(' ');
   
-  // Special case for the question - now gets letter by letter style
+  // Special case for the question - adjust letter spacing for iOS
   if (text === "What if fitness was the foundation of your social life?") {
     return (
       <span className="inline-flex flex-wrap justify-center lg:justify-start w-full">
         {words.map((word, wordIndex) => (
-          <span key={wordIndex} className="inline-flex mr-[0.25em] whitespace-nowrap" style={{ wordBreak: 'keep-all' }}>
+          <span key={wordIndex} className="inline-flex mr-[0.25em] whitespace-nowrap" style={{ 
+            wordBreak: 'keep-all',
+            letterSpacing: '-0.02em'
+          }}>
             {word.split('').map((letter, letterIndex) => (
               <span
                 key={letterIndex}
                 className="inline-block"
                 style={{
                   opacity: 0,
-                  letterSpacing: '0.01em',
                   animation: type === 'fluid' 
                     ? `fadeInFluid 6s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 120) + (letterIndex * 25)}ms forwards`
                     : `fadeInSimple 6s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 120) + (letterIndex * 25)}ms forwards`
