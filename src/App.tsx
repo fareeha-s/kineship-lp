@@ -79,7 +79,6 @@ function App() {
                     text="from your runs to your reps to your spin/pilates/kickboxing class—" 
                     delay={4.5}
                     type="simple"
-                    highlightWords={['runs', 'reps', 'spin/pilates/kickboxing', 'class']}
                   />
                   <AnimatedText 
                     text="you're already going, " 
@@ -89,7 +88,7 @@ function App() {
                   <span className="shine-once">
                     <AnimatedText 
                       text="turn your schedule into an invite" 
-                      delay={4.7}
+                      delay={4.9}
                       type="simple"
                     />
                   </span>
