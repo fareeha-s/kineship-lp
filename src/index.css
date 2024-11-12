@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-white antialiased;
+    overflow-x: hidden;
+    background: #000810;
+    background-attachment: fixed;
+  }
+
+  /* Hide scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For Firefox */
+  * {
+    scrollbar-width: none;
+  }
+
+  @keyframes fadeInFluid {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    35% {
+      opacity: 1;
+      transform: translateY(-6px);
+    }
+    65% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInSimple {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes popAndBounce {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-10px);
+    }
+    70% {
+      transform: translateY(5px);
+    }
+    85% {
+      transform: translateY(-3px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Gradient text styles */
+  .gradient-text {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    
+    /* Sage gradient */
+    background: radial-gradient(
+        circle at center,
+        rgb(156, 193, 143) 30%,
+        rgb(136, 173, 123) 90%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.9);
+    
+    /* Subtle coral glow */
+    filter: drop-shadow(0 0 8px rgba(255, 127, 105, 0.35));
+  }
+
+  /* Just light rays */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.04) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Add this new section */
+  .light-rays {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes slideInFade {
+    0% {
+      opacity: 0;
+      transform: translate3d(-80px, 0, 0);
+    }
+    35% {
+      opacity: 0.7;
+      transform: translate3d(16px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes singleShine {
+    0% {
+      background-position: -100% 50%;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      background-position: 200% 50%;
+      opacity: 1;
+    }
+  }
+
+  .shine-once {
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.9) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: white;
+    animation: singleShine 2s forwards;
+  }
+
+  /* Add this inside your @layer base */
+  a, button, [role="button"] {
+    cursor: none;
+  }
+
+  /* Add this to hide the default cursor across the site */
+  html, body {
+    cursor: none;
+  }
+
+  /* Add this to ensure cursor shows on interactive elements */
+  a, button, [role="button"], input, select, textarea {
+    cursor: none;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .custom-cursor-main,
+    .custom-cursor-shadow {
+      display: none;
+    }
+  }
+}
