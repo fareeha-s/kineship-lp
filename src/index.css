@@ -191,10 +191,10 @@
 
   @supports (-webkit-touch-callout: none) {
     .gradient-text {
-      color: rgb(156, 193, 143);
+      color: rgb(146, 183, 133);
       text-shadow: 
-        0 0 1px rgba(255, 255, 255, 0.95),  /* White outline for iOS */
-        0 0 12px rgba(156, 193, 143, 0.6);   /* Green glow for iOS */
+        0 0 1px rgba(255, 255, 255, 0.9),
+        0 0 10px rgba(146, 183, 133, 0.4);
       -webkit-text-stroke: initial;
       background: none;
       -webkit-text-fill-color: initial;
