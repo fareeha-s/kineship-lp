@@ -75,7 +75,7 @@
     font-weight: 200;
     letter-spacing: -0.02em;
     
-    /* Sage gradient */
+    /* Your gradient */
     background: radial-gradient(
         circle at center,
         rgb(156, 193, 143) 30%,
@@ -85,9 +85,10 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     
+    /* This is your white stroke! */
     -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.9);
     
-    /* Subtle coral glow */
+    /* And your glow effect */
     filter: drop-shadow(0 0 8px rgba(255, 127, 105, 0.35));
   }
 
@@ -185,6 +186,18 @@
     .custom-cursor-main,
     .custom-cursor-shadow {
       display: none;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .gradient-text {
+      color: rgb(156, 193, 143);
+      text-shadow: 
+        0 0 1px rgba(255, 255, 255, 0.95),  /* White outline for iOS */
+        0 0 12px rgba(156, 193, 143, 0.6);   /* Green glow for iOS */
+      -webkit-text-stroke: initial;
+      background: none;
+      -webkit-text-fill-color: initial;
     }
   }
 }
