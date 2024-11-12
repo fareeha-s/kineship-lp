@@ -12,7 +12,7 @@ function App() {
   const [isEthosOpen, setIsEthosOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen font-inter">
+    <div className="relative min-h-screen min-h-[-webkit-fill-available] font-inter pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
       <CustomCursor />
       <div className="light-rays" />
       
@@ -65,7 +65,7 @@ function App() {
                     delay={3.4}
                     type="simple"
                   />
-                  &nbsp;
+                  <br />
                   <span className="font-bold">
                     <AnimatedText 
                       text="build muscle while building bonds 💪✨"
