@@ -8,6 +8,18 @@
     overflow-x: hidden;
     background: #000810;
     background-attachment: fixed;
+    
+    /* Universal Support */
+    min-height: 100vh;
+    /* iOS-specific */
+    min-height: -webkit-fill-available;
+    
+    /* Safe area insets with fallbacks */
+    padding: 0;  /* Fallback */
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   /* Hide scrollbar */
@@ -110,10 +122,10 @@
   /* Add this new section */
   .light-rays {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: env(safe-area-inset-top);
+    left: env(safe-area-inset-left);
+    right: env(safe-area-inset-right);
+    bottom: env(safe-area-inset-bottom);
     background: linear-gradient(
         45deg,
         transparent 0%,
