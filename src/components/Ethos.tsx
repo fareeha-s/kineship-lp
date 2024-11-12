@@ -178,11 +178,9 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                         <div className="space-y-4">
                           <div>
                             <p className="leading-relaxed text-white/70">
-                              our mission is to reimagine our social habits -
+                              our mission is to reimagine our social habits.
                             </p>
-                            <p className="leading-relaxed text-white/70">
-                              because <span className="text-white">relationships are key to lifespan</span>.
-                            </p>
+                            <p className="leading-relaxed text-white/70">because <span className="text-white">relationships are key to lifespan</span>.</p>
                           </div>
 
                           <div className="mt-4">
@@ -193,7 +191,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                               while our gatherings often revolve around abundant food, drinks, and late nights...
                             </p>
                             <p className="leading-relaxed text-white/70 ml-6">
-                              <span className="text-white">we can shape a new culture, fundamentally rooted in our collective health</span>.
+                              we can shape <span className="text-white">a new culture, fundamentally rooted in our collective health</span>.
                             </p>
                           </div>
                         </div>
