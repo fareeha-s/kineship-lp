@@ -212,17 +212,19 @@
   /* Add mobile-specific timing */
   @media (max-width: 768px) {
     @keyframes singleShine {
-      0%, 50% {  /* Stays hidden for first 50% of animation */
+      0% {
         background-position: -100% 50%;
         opacity: 0;
-      }
-      75% {
-        opacity: 1;
       }
       100% {
         background-position: 200% 50%;
         opacity: 1;
       }
+    }
+
+    .shine-once {
+      animation: singleShine 1s forwards;
+      animation-delay: 5.2s; /* Start shine after text appears */
     }
   }
 }
