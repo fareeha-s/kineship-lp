@@ -134,7 +134,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                   >
                     {currentSlide === 0 && "we believe simple, everyday rhythms can unite us."}
                     {currentSlide === 1 && "guided by longevity science,"}
-                    {currentSlide === 2 && "a world where social connection brings us energy, not exhaustion."}
+                    {currentSlide === 2 && "a world where social brings us energy, not exhaustion."}
                   </motion.p>
                   
                   <motion.div 
@@ -177,19 +177,22 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                         </motion.p>
                         <div className="space-y-4">
                           <div>
-                            <p className="leading-relaxed text-white/70 ml-6">
-                              our mission is to reimagine our social habits - <span className="text-white">because relationships are key to lifespan</span>.
+                            <p className="leading-relaxed text-white/70">
+                              our mission is to reimagine our social habits -
+                            </p>
+                            <p className="leading-relaxed text-white/70">
+                              because <span className="text-white">relationships are key to lifespan</span>.
                             </p>
                           </div>
 
                           <div className="mt-4">
-                            <p className="text-white/70 ml-6">
+                            <p className="text-white/70">
                               the data is clear -
                             </p>
-                            <p className="leading-relaxed text-white/70 ml-12">
+                            <p className="leading-relaxed text-white/70">
                               while our gatherings often revolve around abundant food, drinks, and late nights...
                             </p>
-                            <p className="leading-relaxed text-white/70 ml-24">
+                            <p className="leading-relaxed text-white/70 ml-6">
                               <span className="text-white">we can shape a new culture, fundamentally rooted in our collective health</span>.
                             </p>
                           </div>
