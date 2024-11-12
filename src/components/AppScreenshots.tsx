@@ -50,9 +50,9 @@ export default function AppScreenshots() {
   }, [currentIndex]);
 
   return (
-    <div className="relative [transform:translateZ(0)] h-[510px] overflow-hidden">
+    <div className={`relative [transform:translateZ(0)] ${isMobile ? 'h-[400px]' : 'h-[510px]'} overflow-hidden`}>
       <img 
-        src={desktopScreenshots[0]} 
+        src={isMobile ? mobileScreenshots[0] : desktopScreenshots[0]} 
         alt="" 
         className="invisible"
         aria-hidden="true"
@@ -60,12 +60,14 @@ export default function AppScreenshots() {
       />
       
       <div className="absolute top-0 left-0 right-0">
-        {desktopScreenshots.map((screenshot, index) => (
+        {(isMobile ? mobileScreenshots : desktopScreenshots).map((screenshot, index) => (
           <motion.img
             key={index}
             src={screenshot}
             alt={`App Screenshot ${index + 1}`}
-            className="rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center w-full h-[510px] object-contain mix-blend-normal"
+            className={`rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center w-full ${
+              isMobile ? 'h-[400px]' : 'h-[510px]'
+            } object-contain mix-blend-normal`}
             style={{ imageRendering: 'crisp-edges' }}
             animate={{ 
               opacity: index === currentIndex ? 1 : 0,
