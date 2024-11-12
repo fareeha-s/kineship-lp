@@ -1,0 +1,90 @@
+[1mdiff --git a/src/components/AppScreenshots.tsx b/src/components/AppScreenshots.tsx[m
+[1mindex 96071ab..f2ffc4a 100644[m
+[1m--- a/src/components/AppScreenshots.tsx[m
+[1m+++ b/src/components/AppScreenshots.tsx[m
+[36m@@ -1,25 +1,31 @@[m
+ import { useEffect, useState } from 'react';[m
+[31m-import { motion, AnimatePresence } from 'framer-motion';[m
+[31m-import screen1 from '../assets/appscreens/screen-1.svg';[m
+[31m-import screen2 from '../assets/appscreens/screen-2.svg';[m
+[31m-import screen3 from '../assets/appscreens/screen-3-test.svg';[m
+[31m-import screen4 from '../assets/appscreens/screen-4-funsies.svg';[m
+[32m+[m[32mimport { motion } from 'framer-motion';[m
+[32m+[m[32mimport screen1 from '../assets/appscreens/browser/screen-1.png';[m
+[32m+[m[32mimport screen2a from '../assets/appscreens/browser/screen-2a.png';[m
+[32m+[m[32mimport screen2b from '../assets/appscreens/browser/screen-2b.png';[m
+[32m+[m[32mimport screen3 from '../assets/appscreens/browser/screen-3.png';[m
+[32m+[m[32mimport screen4 from '../assets/appscreens/browser/screen-4.png';[m
+ [m
+[31m-const screenshots = [screen1, screen2, screen3, screen4];[m
+[32m+[m[32mconst screenshots = [screen1, screen2a, screen2b, screen3, screen4];[m
+ [m
+ export default function AppScreenshots() {[m
+   const [currentIndex, setCurrentIndex] = useState(0);[m
+ [m
+   useEffect(() => {[m
+     const timer = setInterval(() => {[m
+[31m-      setCurrentIndex((current) => (current + 1) % screenshots.length);[m
+[31m-    }, 4000); // Set interval timing to 4 seconds for consistency[m
+[32m+[m[32m      setCurrentIndex((current) => {[m
+[32m+[m[32m        if (current === 0) return 1;  // Move quickly from first slide[m
+[32m+[m[32m        if (current === 1) return 2;  // Quick transition between 2a and 2b[m
+[32m+[m[32m        if (current === 2) return 3;  // Move to screen 3 with zoom[m
+[32m+[m[32m        return (current + 1) % screenshots.length;[m
+[32m+[m[32m      });[m
+[32m+[m[32m    }, currentIndex === 0 ? 2000 : currentIndex >= 1 && currentIndex <= 2 ? 1200 : 5000);[m
+ [m
+     return () => clearInterval(timer);[m
+[31m-  }, []);[m
+[32m+[m[32m  }, [currentIndex]);[m
+ [m
+   return ([m
+[31m-    <div className="relative [transform:translateZ(0)]">[m
+[32m+[m[32m    <div className="relative [transform:translateZ(0)] h-[510px] overflow-hidden">[m
+       <img [m
+         src={screenshots[0]} [m
+         alt="" [m
+[36m@@ -29,28 +35,23 @@[m [mexport default function AppScreenshots() {[m
+       />[m
+       [m
+       <div className="absolute top-0 left-0 right-0">[m
+[31m-        <AnimatePresence>[m
+[32m+[m[32m        {screenshots.map((screenshot, index) => ([m
+           <motion.img[m
+[31m-            key={currentIndex}[m
+[31m-            src={screenshots[currentIndex]}[m
+[31m-            alt={`App Screenshot ${currentIndex + 1}`}[m
+[31m-            className="rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center"[m
+[31m-            style={{ imageRendering: 'crisp-edges' }}[m
+[31m-            initial={{ opacity: 0 }}[m
+[31m-            animate={{ opacity: 1 }}[m
+[31m-            exit={{ opacity: 0 }}[m
+[31m-            transition={{ duration: 1.5, ease: 'easeInOut' }} // Consistent timing[m
+[31m-          />[m
+[31m-        </AnimatePresence>[m
+[31m-      </div>[m
+[31m-[m
+[31m-      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">[m
+[31m-        {screenshots.map((_, index) => ([m
+[31m-          <div[m
+             key={index}[m
+[31m-            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${[m
+[31m-              index === currentIndex ? 'bg-white scale-125' : 'bg-white/30'[m
+[31m-            }`}[m
+[32m+[m[32m            src={screenshot}[m
+[32m+[m[32m            alt={`App Screenshot ${index + 1}`}[m
+[32m+[m[32m            className="rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center w-full h-[510px] object-contain mix-blend-normal"[m
+[32m+[m[32m            style={{ imageRendering: 'crisp-edges' }}[m
+[32m+[m[32m            animate={{[m[41m [m
+[32m+[m[32m              opacity: index === currentIndex ? 1 : 0,[m
+[32m+[m[32m              scale: currentIndex === 3 && index === 3 ? 1.05 :  // Changed to scale up screen-3[m
+[32m+[m[32m                     currentIndex === 2 && index === 2 ? 1.05 : 1[m
+[32m+[m[32m            }}[m
+[32m+[m[32m            transition={{[m[41m [m
+[32m+[m[32m              duration: (currentIndex === 2 && index === 2) ||[m[41m [m
+[32m+[m[32m                       (currentIndex === 3 && index === 3) ? 1.2 : 0.8,  // Added longer duration for screen-3[m
+[32m+[m[32m              ease: (currentIndex === 2 || currentIndex === 3) ? "easeOut" : "easeInOut"  // Added easeOut for screen-3[m
+[32m+[m[32m            }}[m
+           />[m
+         ))}[m
+       </div>[m
