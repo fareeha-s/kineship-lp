@@ -17,7 +17,9 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
         {words.map((word, wordIndex) => (
           <span key={wordIndex} className="inline-flex mr-[0.25em] whitespace-nowrap" style={{ 
             wordBreak: 'keep-all',
-            letterSpacing: '-0.02em'
+            ...(/iPhone|iPad|iPod|Safari/i.test(navigator.userAgent) && {
+              letterSpacing: '-0.04em',  // Only applies to iOS/Safari
+            })
           }}>
             {word.split('').map((letter, letterIndex) => (
               <span

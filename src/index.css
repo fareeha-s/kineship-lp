@@ -185,4 +185,13 @@
       display: none;
     }
   }
+
+  @supports (-webkit-touch-callout: none) {
+    .gradient-text {
+      color: rgb(156, 193, 143);  /* Same sage green from your gradient */
+      text-shadow: 
+        0 0 1px rgba(255, 255, 255, 0.95),
+        0 0 12px rgba(156, 193, 143, 0.6);   /* Same green for the glow */
+    }
+  }
 }
