@@ -75,20 +75,18 @@
     font-weight: 200;
     letter-spacing: -0.02em;
     
-    /* Sage gradient */
-    background: radial-gradient(
-        circle at center,
-        rgb(156, 193, 143) 30%,
-        rgb(136, 173, 123) 90%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* Match the sage green from your logo */
+    color: rgb(156, 193, 143);
     
-    -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.9);
+    /* Clean white outline/glow effect */
+    text-shadow: 
+      0 0 1px rgba(255, 255, 255, 0.95),  /* Crisp white outline */
+      0 0 12px rgba(156, 193, 143, 0.6);   /* Sage green glow */
     
-    /* Subtle coral glow */
-    filter: drop-shadow(0 0 8px rgba(255, 127, 105, 0.35));
+    /* Reset problematic properties */
+    -webkit-text-stroke: initial;
+    background: none;
+    -webkit-text-fill-color: initial;
   }
 
   /* Just light rays */
