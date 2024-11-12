@@ -3,19 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    height: 100%;
+    min-height: -webkit-fill-available;
+    background: #000810;
+  }
+
   body {
     @apply text-white antialiased;
     overflow-x: hidden;
-    background: #000810;
-    background-attachment: fixed;
-    
-    /* Universal Support */
     min-height: 100vh;
-    /* iOS-specific */
     min-height: -webkit-fill-available;
-    
-    /* Safe area insets with fallbacks */
-    padding: 0;  /* Fallback */
+    padding: 0;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
     padding-left: env(safe-area-inset-left, 0px);
@@ -122,10 +121,7 @@
   /* Add this new section */
   .light-rays {
     position: fixed;
-    top: env(safe-area-inset-top);
-    left: env(safe-area-inset-left);
-    right: env(safe-area-inset-right);
-    bottom: env(safe-area-inset-bottom);
+    inset: 0;
     background: linear-gradient(
         45deg,
         transparent 0%,
@@ -209,6 +205,34 @@
     .shine-once {
       animation: singleShine 1s forwards;
       animation-delay: 5.2s; /* Start shine after text appears */
+    }
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+
+  /* Mobile-specific gradients */
+  @media (max-width: 768px) {
+    .light-rays {
+      background: linear-gradient(
+        180deg,
+        #000810 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%
+      );
+    }
+
+    body::before {
+      background: linear-gradient(
+        180deg,
+        #000810 0%,
+        transparent 10%,
+        rgba(255, 255, 255, 0.04) 50%,
+        transparent 100%
+      );
     }
   }
 }
