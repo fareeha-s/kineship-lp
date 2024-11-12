@@ -61,7 +61,20 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
   const getSlideEmoji = (slideIndex: number) => {
     switch(slideIndex) {
       case 0:
-        return "♾️";
+        return (
+          <span 
+            className="text-3xl"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #FF6B7A 45%, rgb(255, 127, 105) 55%)',
+              WebkitTextFillColor: 'transparent',
+              WebkitBackgroundClip: 'text',
+              display: 'inline-block',
+              filter: 'drop-shadow(0 0 8px rgba(255, 127, 105, 0.35))'
+            }}
+          >
+            ➰
+          </span>
+        );
       case 1:
         return "🫀🧬";
       case 2:

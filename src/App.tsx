@@ -88,13 +88,11 @@ function App() {
                     delay={4.7}
                     type="simple"
                   />
-                  <span className="shine-once">
-                    <AnimatedText 
-                      text="turn your schedule into an invite" 
-                      delay={4.9}
-                      type="simple"
-                    />
-                  </span>
+                  <AnimatedText 
+                    text="turn your schedule into an invite" 
+                    delay={4.9}
+                    type="simple"
+                  />
                 </p>
               </div>
               

@@ -56,7 +56,7 @@ export default function WaitlistForm() {
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-sage to-coral p-2 rounded-[8px] hover:opacity-90 transition-all duration-300 hover:scale-105 disabled:opacity-50"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-sage to-[#FF6B7A] p-2 rounded-[8px] hover:opacity-90 transition-all duration-300 hover:scale-105 disabled:opacity-50"
           disabled={status === 'loading' || status === 'success'}
         >
           <ArrowRight className="w-4 h-4 text-white" />
