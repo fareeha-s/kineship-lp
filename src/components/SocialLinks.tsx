@@ -52,7 +52,7 @@ export default function SocialLinks({ onEthosClick, className }: SocialLinksProp
           {link.type === 'text' ? (
             <motion.button
               onClick={onEthosClick}
-              className="text-white/70 hover:text-white transition-colors font-serif italic text-lg ml-2 animate-glow"
+              className="text-white hover:text-white transition-colors font-serif italic text-xl ml-2 [text-shadow:_0_0_8px_rgb(255,255,255)]"
               aria-label={link.label}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -64,6 +64,8 @@ export default function SocialLinks({ onEthosClick, className }: SocialLinksProp
               href={link.href}
               className="text-white/70 hover:text-white transition-colors"
               aria-label={link.label}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <link.Icon size={24} />
             </a>
