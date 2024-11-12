@@ -8,16 +8,13 @@ interface AnimatedTextProps {
 export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords }: AnimatedTextProps) => {
   const words = text.split(' ');
   
-  // Special case for the question - adjust letter spacing for iOS
+  // Special case for the question - removed iOS letter spacing adjustment
   if (text === "What if fitness was the foundation of your social life?") {
     return (
       <span className="inline-flex flex-wrap justify-center lg:justify-start w-full">
         {words.map((word, wordIndex) => (
           <span key={wordIndex} className="inline-flex mr-[0.25em] whitespace-nowrap" style={{ 
-            wordBreak: 'keep-all',
-            ...(/iPhone|iPad|iPod|Safari/i.test(navigator.userAgent) && {
-              letterSpacing: '-0.04em',  // Only applies to iOS/Safari
-            })
+            wordBreak: 'keep-all'
           }}>
             {word.split('').map((letter, letterIndex) => (
               <span
