@@ -75,18 +75,21 @@
     font-weight: 200;
     letter-spacing: -0.02em;
     
-    /* Match the sage green from your logo */
-    color: rgb(156, 193, 143);
+    /* Your gradient */
+    background: radial-gradient(
+        circle at center,
+        rgb(156, 193, 143) 30%,
+        rgb(136, 173, 123) 90%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     
-    /* Clean white outline/glow effect */
-    text-shadow: 
-      0 0 1px rgba(255, 255, 255, 0.95),  /* Crisp white outline */
-      0 0 12px rgba(156, 193, 143, 0.6);   /* Sage green glow */
+    /* This is your white stroke! */
+    -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.9);
     
-    /* Reset problematic properties */
-    -webkit-text-stroke: initial;
-    background: none;
-    -webkit-text-fill-color: initial;
+    /* And your glow effect */
+    filter: drop-shadow(0 0 8px rgba(255, 127, 105, 0.35));
   }
 
   /* Just light rays */
@@ -188,10 +191,13 @@
 
   @supports (-webkit-touch-callout: none) {
     .gradient-text {
-      color: rgb(156, 193, 143);  /* Same sage green from your gradient */
+      color: rgb(156, 193, 143);
       text-shadow: 
-        0 0 1px rgba(255, 255, 255, 0.95),
-        0 0 12px rgba(156, 193, 143, 0.6);   /* Same green for the glow */
+        0 0 1px rgba(255, 255, 255, 0.95),  /* White outline for iOS */
+        0 0 12px rgba(156, 193, 143, 0.6);   /* Green glow for iOS */
+      -webkit-text-stroke: initial;
+      background: none;
+      -webkit-text-fill-color: initial;
     }
   }
 }
