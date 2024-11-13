@@ -32,10 +32,6 @@ function App() {
           </h1>
 
           <div className="flex flex-col lg:flex-row-reverse items-center justify-center gap-12 lg:gap-24">
-            <div className="flex-1 flex justify-center items-center max-w-lg">
-              <AppScreenshots />
-            </div>
-            
             <div className="flex-1 text-center lg:text-left max-w-2xl">
               <h1 className="hidden lg:block font-bricolage text-8xl font-bold mb-8 tracking-tight">
                 <div style={{ 
@@ -50,16 +46,17 @@ function App() {
                 </div>
               </h1>
 
-              <p className="text-3xl md:text-4xl font-medium text-white mb-8 leading-tight tracking-[-0.03em]" 
-                 style={{
-                   textShadow: '0 0 20px rgba(255, 255, 255, 0.25)'
-                 }}>
+              <p className="text-3xl md:text-4xl font-medium text-white mb-8 leading-tight tracking-[-0.03em]">
                 <AnimatedText 
                   text="What if fitness was the foundation of your social life?" 
                   delay={1.2}
                   type="simple"
                 />
               </p>
+
+              <div className="lg:hidden mb-8">
+                <AppScreenshots />
+              </div>
 
               <div className="space-y-6 text-lg md:text-xl text-white/80 leading-relaxed lowercase text-center lg:text-left">
                 <p className="text-white/90">
@@ -95,7 +92,7 @@ function App() {
                   />
                 </p>
               </div>
-              
+
               <div className="mt-6 space-y-8">
                 <div style={{ 
                   opacity: 0, 
@@ -118,6 +115,10 @@ function App() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="hidden lg:flex flex-1 justify-center items-center max-w-lg">
+              <AppScreenshots />
             </div>
           </div>
         </div>
