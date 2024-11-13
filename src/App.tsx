@@ -31,7 +31,7 @@ function App() {
             </div>
           </h1>
 
-          <div className="flex flex-col lg:flex-row-reverse items-center justify-center gap-12 lg:gap-24">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24">
             <div className="flex-1 text-center lg:text-left max-w-2xl">
               <h1 className="hidden lg:block font-bricolage text-8xl font-bold mb-8 tracking-tight">
                 <div style={{ 
