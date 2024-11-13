@@ -40,7 +40,12 @@ export default function AppScreenshots() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((current) => (current + 1) % (isMobile ? 4 : desktopScreenshots.length));
-    }, 3000); // Simple 3-second transition for all slides
+    }, isMobile ? (
+      currentIndex === 0 ? 2000 :  // Slide 1: 2s
+      currentIndex === 1 ? 3000 :  // Slide 2: 3s
+      currentIndex === 2 ? 3500 :  // Slide 3: 3.5s
+      3500                         // Slide 4: 3.5s
+    ) : 3000);
 
     return () => clearInterval(timer);
   }, [currentIndex, isMobile]);
@@ -65,12 +70,16 @@ export default function AppScreenshots() {
               isMobile ? 'h-[430px]' : 'h-[510px]'
             } object-contain mix-blend-normal`}
             style={{ imageRendering: 'crisp-edges' }}
+            initial={{
+              opacity: index === 0 ? 1 : 0,
+              scale: 1
+            }}
             animate={{ 
               opacity: index === currentIndex ? 1 : 0,
               scale: 1
             }}
             transition={{ 
-              duration: 0.8,
+              duration: 2.0,
               ease: "easeInOut"
             }}
           />
