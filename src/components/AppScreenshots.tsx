@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 // Desktop images
-import screen1 from '../assets/appscreens/browser/brow-1.png';
-import screen2a from '../assets/appscreens/browser/brow-2a.png';
-import screen2b from '../assets/appscreens/browser/brow-2b.png';
-import screen2c from '../assets/appscreens/browser/brow-2c.png';
+import screen1 from '../assets/appscreens/browser/screen-1.png';
+import screen2a from '../assets/appscreens/browser/screen-2a.png';
+import screen2b from '../assets/appscreens/browser/screen-2b.png';
+import screen2c from '../assets/appscreens/browser/screen-2c.png';
 import screen3 from '../assets/appscreens/browser/screen-3.png';
 import screen4 from '../assets/appscreens/browser/screen-4.png';
 // Mobile images (same names, different path)
-import mobileScreen1 from '../assets/appscreens/mobile/test-1.svg';
-import mobileScreen2 from '../assets/appscreens/mobile/test-2.svg';
-import mobileScreen3 from '../assets/appscreens/mobile/test-3.svg';
-import mobileScreen4 from '../assets/appscreens/mobile/test-4.svg';
+import mobileScreen1 from '../assets/appscreens/mobile/tester-screen-1.png';
+import mobileScreen2 from '../assets/appscreens/mobile/tester-screen-2.png';
+import mobileScreen3 from '../assets/appscreens/mobile/screen-3.png';
+import mobileScreen4 from '../assets/appscreens/mobile/screen-4.png';
 
 const desktopScreenshots = [screen1, screen2a, screen2b, screen2c, screen3, screen4];
 const mobileScreenshots = [mobileScreen1, mobileScreen2, mobileScreen3, mobileScreen4];
