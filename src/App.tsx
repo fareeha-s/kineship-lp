@@ -16,9 +16,9 @@ function App() {
       <CustomCursor />
       <div className="light-rays" />
       
-      <main className="relative container mx-auto px-4 py-12 md:py-24 min-h-screen flex items-center">
+      <main className="relative container mx-auto px-2 md:px-4 py-12 md:py-24 min-h-screen flex items-center">
         <div className="w-full">
-          <h1 className="block lg:hidden font-bricolage text-6xl md:text-7xl font-bold mb-8 tracking-tight text-center">
+          <h1 className="block lg:hidden font-bricolage text-7xl md:text-7xl font-bold mb-3 tracking-tight text-center">
             <div style={{ 
               opacity: 0, 
               animation: 'slideInFade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
@@ -46,7 +46,7 @@ function App() {
                 </div>
               </h1>
 
-              <p className="text-3xl md:text-4xl font-medium text-white mb-8 leading-tight tracking-[-0.03em]">
+              <p className="text-[4.5vw] md:text-4xl font-medium text-white mb-8 leading-tight tracking-[-0.03em]">
                 <AnimatedText 
                   text="What if fitness was the foundation of your social life?" 
                   delay={1.2}

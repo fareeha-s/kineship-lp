@@ -8,8 +8,8 @@ import screen2c from '../assets/appscreens/browser/screen-2c.png';
 import screen3 from '../assets/appscreens/browser/screen-3.png';
 import screen4 from '../assets/appscreens/browser/screen-4.png';
 // Mobile images (same names, different path)
-import mobileScreen1 from '../assets/appscreens/mobile/tester-screen-1.png';
-import mobileScreen2 from '../assets/appscreens/mobile/tester-screen-2.png';
+import mobileScreen1 from '../assets/appscreens/mobile/screen-1.png';
+import mobileScreen2 from '../assets/appscreens/mobile/screen-2a.png';
 import mobileScreen3 from '../assets/appscreens/mobile/screen-3.png';
 import mobileScreen4 from '../assets/appscreens/mobile/screen-4.png';
 

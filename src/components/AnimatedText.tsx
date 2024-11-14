@@ -21,7 +21,7 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
     return (
       <span className="inline-flex flex-wrap justify-center lg:justify-start w-full">
         {wordGroups.map((group) => (
-          <span key={totalWordIndex} className="flex lg:inline-flex w-full lg:w-auto justify-center lg:justify-start">
+          <span key={totalWordIndex} className="flex lg:inline-flex w-auto lg:w-auto justify-center lg:justify-start whitespace-nowrap md:whitespace-normal">
             {group.map((word) => {
               const currentWordIndex = totalWordIndex++;
               return (
