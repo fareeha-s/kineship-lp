@@ -8,17 +8,27 @@ interface AnimatedTextProps {
 export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords }: AnimatedTextProps) => {
   const words = text.split(' ');
   
-  // Special case for the question
+  // Special case for the question/statement
   if (text === "What if fitness was the foundation of your social life?") {
-    const wordGroups = [
-      ["What", "if", "fitness", "was"],
-      ["the", "foundation", "of", "your", "social", "life?"]
-    ];
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const mobileText = "Make fitness the foundation of your social life.";
+    const desktopText = "What if fitness was the foundation of your social life?";
+    
+    const textToUse = isMobile ? mobileText : desktopText;
+    const wordGroups = isMobile ? 
+      [
+        ["Make", "fitness", "the"],
+        ["foundation", "of", "your", "social", "life."]
+      ] : 
+      [
+        ["What", "if", "fitness", "was"],
+        ["the", "foundation", "of", "your", "social", "life?"]
+      ];
 
     let totalWordIndex = 0;
 
     return (
-      <span className="inline-flex flex-wrap justify-center lg:justify-start w-full">
+      <span className="inline-flex flex-wrap justify-center lg:justify-start w-full overflow-hidden">
         {wordGroups.map((group) => (
           <span key={totalWordIndex} className="flex lg:inline-flex w-full lg:w-auto justify-center lg:justify-start whitespace-nowrap">
             {group.map((word) => {
