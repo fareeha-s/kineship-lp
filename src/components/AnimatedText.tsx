@@ -11,9 +11,8 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
   // Special case for the question
   if (text === "What if fitness was the foundation of your social life?") {
     const wordGroups = [
-      ["What", "if", "fitness"],
-      ["was", "the", "foundation"],
-      ["of", "your", "social", "life?"]
+      ["What", "if", "fitness", "was"],
+      ["the", "foundation", "of", "your", "social", "life?"]
     ];
 
     let totalWordIndex = 0;
@@ -21,7 +20,7 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
     return (
       <span className="inline-flex flex-wrap justify-center lg:justify-start w-full">
         {wordGroups.map((group) => (
-          <span key={totalWordIndex} className="flex lg:inline-flex w-auto lg:w-auto justify-center lg:justify-start whitespace-nowrap md:whitespace-normal">
+          <span key={totalWordIndex} className="flex lg:inline-flex w-full lg:w-auto justify-center lg:justify-start whitespace-nowrap">
             {group.map((word) => {
               const currentWordIndex = totalWordIndex++;
               return (
