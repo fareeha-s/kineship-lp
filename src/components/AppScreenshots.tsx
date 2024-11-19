@@ -22,33 +22,33 @@ export default function AppScreenshots() {
   const [hasStarted, setHasStarted] = useState(false);  // Track if we've started the sequence
   const [isMobile, setIsMobile] = useState(false);
 
-  // Initial delay to sync with kineship title
+  // Initial delay to sync with main question
   useEffect(() => {
     const initialDelay = setTimeout(() => {
       setCurrentIndex(0);  // Show first slide
       setHasStarted(true); // Mark that we've started
-    }, 3900);  // 1.2s (question delay) + 6s (question animation) + 0.3s buffer
+    }, 800);  // Appears right after main question (which shows at 0.6s)
 
     return () => clearTimeout(initialDelay);
   }, []);
 
   // Main interval for transitions
   useEffect(() => {
-    if (hasStarted) {  // Removed the !isMobile check so it runs for both
+    if (hasStarted) {
       const timer = setInterval(() => {
         setCurrentIndex((current) => (current + 1) % (isMobile ? mobileScreenshots.length : desktopScreenshots.length));
       }, 
         isMobile ? (
-          currentIndex === 0 ? 2000 :  // Slide 1: 2s
-          currentIndex === 1 ? 3000 :  // Slide 2: 3s
-          currentIndex === 2 ? 3500 :  // Slide 3: 3.5s
-          3500                         // Slide 4: 3.5s
+          currentIndex === 0 ? 1200 :  // First transition
+          currentIndex === 1 ? 1500 :  // Second transition
+          currentIndex === 2 ? 1500 :  // Third transition
+          1500                         // Rest
         ) : (
-          currentIndex === 0 ? 2500 :    // brow-1: moderate
-          currentIndex === 1 ? 1500 :    // brow-2a: quick
-          currentIndex === 2 ? 1500 :    // brow-2b: quick
-          currentIndex === 3 ? 1500 :    // brow-2c: quick
-          4500                           // screen-3 and screen-4: longer
+          currentIndex === 0 ? 1200 :  // First transition
+          currentIndex === 1 ? 800 :   // Second transition
+          currentIndex === 2 ? 800 :   // Third transition
+          currentIndex === 3 ? 800 :   // Fourth transition
+          2000                         // Rest
         )
       );
       
@@ -96,7 +96,7 @@ export default function AppScreenshots() {
               opacity: index === currentIndex ? 1 : 0
             }}
             transition={{ 
-              duration: 1.5,
+              duration: 0.8, // Reduced from 1.5
               ease: "easeInOut"
             }}
           />

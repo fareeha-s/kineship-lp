@@ -21,7 +21,8 @@ function App() {
           <h1 className="block lg:hidden font-bricolage text-7xl md:text-7xl font-bold mb-3 tracking-tight text-center">
             <div style={{ 
               opacity: 0, 
-              animation: 'slideInFade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+              animation: 'slideInFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              animationDelay: '0.1s',
               willChange: 'transform',
               backfaceVisibility: 'hidden'
             }}>
@@ -36,7 +37,8 @@ function App() {
               <h1 className="hidden lg:block font-bricolage text-8xl font-bold mb-8 tracking-tight">
                 <div style={{ 
                   opacity: 0, 
-                  animation: 'slideInFade 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                  animation: 'slideInFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                  animationDelay: '0.1s',
                   willChange: 'transform',
                   backfaceVisibility: 'hidden'
                 }}>
@@ -49,7 +51,7 @@ function App() {
               <p className="text-[5.5vw] md:text-4xl font-medium text-white mb-8 leading-tight tracking-[-0.03em]">
                 <AnimatedText 
                   text="What if fitness was the foundation of your social life?" 
-                  delay={1.2}
+                  delay={0.6}
                   type="simple"
                 />
               </p>
@@ -62,14 +64,14 @@ function App() {
                 <p className="text-white/90">
                   <AnimatedText 
                     text="the kineship app shares your workout calendar with your circles." 
-                    delay={3.4}
+                    delay={1.4}
                     type="simple"
                   />
                   <br />
                   <span className="font-bold">
                     <AnimatedText 
                       text="build muscle while building bonds 💪✨"
-                      delay={4.2}
+                      delay={1.8}
                       type="fluid"
                     />
                   </span>
@@ -77,17 +79,17 @@ function App() {
                 <p className="text-lg md:text-base text-white/80">
                   <AnimatedText 
                     text="from your runs to your reps to your spin/pilates/kickboxing class—" 
-                    delay={4.5}
+                    delay={2.2}
                     type="simple"
                   />
                   <AnimatedText 
                     text="you're already going, " 
-                    delay={4.7}
+                    delay={2.4}
                     type="simple"
                   />
                   <AnimatedText 
                     text="turn your schedule into an invite" 
-                    delay={4.9}
+                    delay={2.6}
                     type="simple"
                   />
                 </p>
@@ -96,16 +98,16 @@ function App() {
               <div className="mt-6 space-y-8">
                 <div style={{ 
                   opacity: 0, 
-                  animation: 'fadeInSimple 2.5s ease forwards',
-                  animationDelay: '6.5s'
+                  animation: 'fadeInSimple 0.8s ease forwards',
+                  animationDelay: '2.8s'
                 }}>
                   <WaitlistForm />
                 </div>
                 
                 <div style={{ 
                   opacity: 0, 
-                  animation: 'fadeInSimple 2.5s ease forwards',
-                  animationDelay: '6.7s'
+                  animation: 'fadeInSimple 0.8s ease forwards',
+                  animationDelay: '3.0s'
                 }}>
                   <div className="flex flex-col items-center lg:items-start gap-4">
                     <SocialLinks 

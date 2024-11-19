@@ -34,7 +34,7 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
                       className="inline-block"
                       style={{
                         opacity: 0,
-                        animation: `fadeInSimple 6s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (currentWordIndex * 120) + (letterIndex * 25)}ms forwards`
+                        animation: `fadeInSimple 3s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (currentWordIndex * 80)}ms forwards`
                       }}
                     >
                       {letter}
@@ -64,8 +64,8 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
                 style={{
                   opacity: 0,
                   animation: type === 'fluid' 
-                    ? `fadeInFluid 4s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 120)}ms forwards`
-                    : `fadeInSimple 4s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 100)}ms forwards`
+                    ? `fadeInFluid 2s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 80)}ms forwards`
+                    : `fadeInSimple 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 60)}ms forwards`
                 }}
               >
                 {word}
@@ -83,8 +83,8 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
                   style={{
                     opacity: 0,
                     animation: type === 'fluid' 
-                      ? `fadeInFluid 2.4s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 120) + (letterIndex * 25)}ms forwards`
-                      : `fadeInSimple 2.2s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 100) + (letterIndex * 20)}ms forwards`
+                      ? `fadeInFluid 2s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 80) + (letterIndex * 15)}ms forwards`
+                      : `fadeInSimple 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) ${(delay * 1000) + (wordIndex * 60) + (letterIndex * 12)}ms forwards`
                   }}
                 >
                   {letter}
@@ -105,7 +105,7 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
           key={wordIndex}
           style={{
             opacity: 0,
-            animation: `fadeInSimple 3s cubic-bezier(0.4, 0, 0.2, 1) ${delay * 1000}ms forwards`,
+            animation: `fadeInSimple 1.5s cubic-bezier(0.4, 0, 0.2, 1) ${delay * 1000}ms forwards`,
             color: highlightWords?.includes(word) ? 'white' : 'inherit'
           }}
         >
