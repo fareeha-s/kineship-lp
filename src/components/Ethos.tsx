@@ -193,7 +193,6 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                             <p className="leading-relaxed text-white/70">
                               our mission is to reimagine our social habits.
                             </p>
-                            <p className="leading-relaxed text-white/70">because <span className="text-white">relationships are key to lifespan</span>.</p>
                           </div>
 
                           <div className="mt-4">

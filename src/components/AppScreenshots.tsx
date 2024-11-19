@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 // Desktop images
 import screen1 from '../assets/appscreens/browser/screen-1.png';
-import screen2a from '../assets/appscreens/browser/screen-2a.png';
-import screen2b from '../assets/appscreens/browser/screen-2b.png';
 import screen2c from '../assets/appscreens/browser/screen-2c.png';
 import screen3 from '../assets/appscreens/browser/screen-3.png';
 import screen4 from '../assets/appscreens/browser/screen-4.png';
@@ -13,7 +11,7 @@ import mobileScreen2 from '../assets/appscreens/mobile/screen-2a.png';
 import mobileScreen3 from '../assets/appscreens/mobile/screen-3.png';
 import mobileScreen4 from '../assets/appscreens/mobile/screen-4.png';
 
-const desktopScreenshots = [screen1, screen2a, screen2b, screen2c, screen3, screen4];
+const desktopScreenshots = [screen1, screen2c, screen3, screen4];
 const mobileScreenshots = [mobileScreen1, mobileScreen2, mobileScreen3, mobileScreen4];
 
 
@@ -39,16 +37,14 @@ export default function AppScreenshots() {
         setCurrentIndex((current) => (current + 1) % (isMobile ? mobileScreenshots.length : desktopScreenshots.length));
       }, 
         isMobile ? (
-          currentIndex === 0 ? 1200 :  // First transition
-          currentIndex === 1 ? 1500 :  // Second transition
-          currentIndex === 2 ? 1500 :  // Third transition
-          1500                         // Rest
+          currentIndex === 0 ? 2000 :  // Slide 1: 2s
+          currentIndex === 1 ? 3000 :  // Slide 2: 3s
+          currentIndex === 2 ? 3500 :  // Slide 3: 3.5s
+          3500                         // Slide 4: 3.5s
         ) : (
-          currentIndex === 0 ? 1200 :  // First transition
-          currentIndex === 1 ? 800 :   // Second transition
-          currentIndex === 2 ? 800 :   // Third transition
-          currentIndex === 3 ? 800 :   // Fourth transition
-          2000                         // Rest
+          currentIndex === 0 ? 2000 :    // screen-1: shorter now
+          currentIndex === 1 ? 2500 :    // screen-2c: same as before
+          4500                           // screen-3 and screen-4: longer
         )
       );
       
@@ -96,7 +92,7 @@ export default function AppScreenshots() {
               opacity: index === currentIndex ? 1 : 0
             }}
             transition={{ 
-              duration: 0.8, // Reduced from 1.5
+              duration: 1.5, // Increased from whatever it was before
               ease: "easeInOut"
             }}
           />

@@ -48,7 +48,7 @@ function App() {
                 </div>
               </h1>
 
-              <p className="text-[5.5vw] md:text-4xl font-medium text-white mb-8 leading-tight tracking-[-0.03em]">
+              <p className="text-[5.5vw] md:text-4xl font-semibold text-white mb-8 leading-tight">
                 <AnimatedText 
                   text="What if fitness was the foundation of your social life?" 
                   delay={0.6}
@@ -56,7 +56,11 @@ function App() {
                 />
               </p>
 
-              <div className="lg:hidden mb-8">
+              <div className="lg:hidden mb-8" style={{ 
+                opacity: 0, 
+                animation: 'fadeInSimple 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                animationDelay: '2.0s'
+              }}>
                 <AppScreenshots />
               </div>
 
@@ -64,32 +68,32 @@ function App() {
                 <p className="text-white/90">
                   <AnimatedText 
                     text="the kineship app shares your workout calendar with your circles." 
-                    delay={1.4}
+                    delay={2.4}
                     type="simple"
                   />
                   <br />
                   <span className="font-bold">
                     <AnimatedText 
                       text="build muscle while building bonds 💪✨"
-                      delay={1.8}
+                      delay={2.8}
                       type="fluid"
                     />
                   </span>
                 </p>
-                <p className="text-lg md:text-base text-white/80">
+                <p className="text-base md:text-lg text-white/80">
                   <AnimatedText 
                     text="from your runs to your reps to your spin/pilates/kickboxing class—" 
-                    delay={2.2}
+                    delay={3.6}
                     type="simple"
                   />
                   <AnimatedText 
                     text="you're already going, " 
-                    delay={2.4}
+                    delay={3.8}
                     type="simple"
                   />
                   <AnimatedText 
                     text="turn your schedule into an invite" 
-                    delay={2.6}
+                    delay={4.0}
                     type="simple"
                   />
                 </p>
@@ -119,7 +123,11 @@ function App() {
               </div>
             </div>
 
-            <div className="hidden lg:flex flex-1 justify-center items-center max-w-lg">
+            <div className="hidden lg:flex flex-1 justify-center items-center max-w-lg" style={{ 
+              opacity: 0, 
+              animation: 'fadeInSimple 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              animationDelay: '1.4s'
+            }}>
               <AppScreenshots />
             </div>
           </div>
