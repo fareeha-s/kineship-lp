@@ -103,7 +103,7 @@ function App() {
                 <div style={{ 
                   opacity: 0, 
                   animation: 'fadeInSimple 0.8s ease forwards',
-                  animationDelay: '2.8s'
+                  animationDelay: '4.2s'
                 }}>
                   <WaitlistForm />
                 </div>
@@ -111,7 +111,7 @@ function App() {
                 <div style={{ 
                   opacity: 0, 
                   animation: 'fadeInSimple 0.8s ease forwards',
-                  animationDelay: '3.0s'
+                  animationDelay: '4.4s'
                 }}>
                   <div className="flex flex-col items-center lg:items-start gap-4">
                     <SocialLinks 
