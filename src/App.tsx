@@ -48,7 +48,7 @@ function App() {
                 </div>
               </h1>
 
-              <p className="text-[5.5vw] md:text-4xl font-semibold text-white mb-8 leading-tight">
+              <p className="text-[5.5vw] md:text-4xl font-medium tracking-[-0.01em] text-white mb-8 leading-[1.15]">
                 <AnimatedText 
                   text="What if fitness was the foundation of your social life?" 
                   delay={0.6}
