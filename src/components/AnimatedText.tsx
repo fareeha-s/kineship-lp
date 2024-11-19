@@ -11,10 +11,7 @@ export const AnimatedText = ({ text, delay = 0, type = 'simple', highlightWords 
   // Special case for the question/statement
   if (text === "What if fitness was the foundation of your social life?") {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const mobileText = "Make fitness the foundation of your social life.";
-    const desktopText = "What if fitness was the foundation of your social life?";
     
-    const textToUse = isMobile ? mobileText : desktopText;
     const wordGroups = isMobile ? 
       [
         ["Make", "fitness", "the"],

@@ -58,6 +58,22 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
     };
   }, [currentSlide]); // Add currentSlide as dependency to check bounds correctly
 
+  const handleDragEnd = (
+    _event: MouseEvent | TouchEvent | PointerEvent,
+    info: {
+      offset: { x: number; y: number };
+      velocity: { x: number; y: number };
+    }
+  ) => {
+    const SWIPE_THRESHOLD = 50;
+    
+    if (info.offset.x < -SWIPE_THRESHOLD && currentSlide < 2) {
+      setCurrentSlide(curr => curr + 1);
+    } else if (info.offset.x > SWIPE_THRESHOLD && currentSlide > 0) {
+      setCurrentSlide(curr => curr - 1);
+    }
+  };
+
   const getSlideEmoji = (slideIndex: number) => {
     switch(slideIndex) {
       case 0:
@@ -117,10 +133,14 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 stiffness: 300,
                 damping: 30 
               }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
               className="modal-content relative mx-auto lg:ml-[8%] lg:mt-[35vh] mb-8 w-[90vw] lg:w-[45vw] max-w-2xl z-[70]
                        bg-black/10 backdrop-blur-[12px] rounded-3xl p-8 md:p-10
                        border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_48px_rgba(0,0,0,0.3)]
-                       font-inter"
+                       font-inter touch-pan-y"
             >
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
               

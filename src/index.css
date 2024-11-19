@@ -82,7 +82,7 @@
 
   /* Gradient text styles */
   .gradient-text {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
     font-weight: 200;
     letter-spacing: -0.02em;
     
@@ -232,5 +232,12 @@
         transparent 100%
       );
     }
+  }
+
+  /* Add font-display to control font loading behavior */
+  @font-face {
+    font-family: 'Bricolage Grotesque';
+    font-display: block;  /* This will give the font a very short block period and then swap */
+    /* or use: font-display: swap; for immediate swap */
   }
 }
