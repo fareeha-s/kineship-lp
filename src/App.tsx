@@ -48,7 +48,7 @@ function App() {
                 </div>
               </h1>
 
-              <p className="text-[5.5vw] md:text-4xl font-medium tracking-[-0.01em] text-white mb-8 leading-[1.15]">
+              <p className="text-[5.5vw] md:text-4xl font-semibold text-white mb-8 leading-tight">
                 <AnimatedText 
                   text="What if fitness was the foundation of your social life?" 
                   delay={0.6}
@@ -64,7 +64,7 @@ function App() {
                 <AppScreenshots />
               </div>
 
-              <div className="space-y-6 text-lg md:text-xl text-white/80 leading-relaxed lowercase text-center lg:text-left">
+              <div className="space-y-6 text-lg md:text-xl text-white/80 leading-relaxed lowercase text-center lg:text-left px-6 md:px-0">
                 <p className="text-white/90">
                   <AnimatedText 
                     text="the kineship app shares your workout calendar with your circles." 
@@ -74,7 +74,7 @@ function App() {
                   <br />
                   <span className="font-bold">
                     <AnimatedText 
-                      text="build muscle while building bonds 💪✨"
+                      text="build muscle, build bonds 💪✨"
                       delay={2.8}
                       type="fluid"
                     />
