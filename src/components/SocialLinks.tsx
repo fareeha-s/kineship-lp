@@ -20,12 +20,6 @@ const socialLinks: SocialLink[] = [
   },
   { 
     type: 'link',
-    Icon: Linkedin,
-    href: 'https://linkedin.com/company/kineship',
-    label: 'LinkedIn'
-  },
-  { 
-    type: 'link',
     Icon: Send,
     href: 'mailto:hello@kineship.com',
     label: 'Email'
