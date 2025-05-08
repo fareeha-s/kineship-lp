@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface Point {
   x: number;
@@ -8,7 +8,7 @@ interface Point {
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const shadowRef = useRef<HTMLDivElement>(null);
-  
+
   // Physics state refs (using refs to avoid re-renders)
   const mouse = useRef<Point>({ x: 0, y: 0 });
   const position = useRef<Point>({ x: 0, y: 0 });
@@ -17,9 +17,10 @@ export default function CustomCursor() {
 
   // Move the mobile check inside useEffect
   useEffect(() => {
-    const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+    const isMobileOrTablet =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      );
 
     if (isMobileOrTablet) {
       return; // Exit early if mobile device
@@ -43,10 +44,11 @@ export default function CustomCursor() {
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       // Increased distance threshold with smoother reset
-      if (distance > 200) { // Increased from 100 to 200
+      if (distance > 200) {
+        // Increased from 100 to 200
         position.current = {
-          x: mouse.current.x - (dx * 0.3), // More gradual catch-up
-          y: mouse.current.y - (dy * 0.3)
+          x: mouse.current.x - dx * 0.3, // More gradual catch-up
+          y: mouse.current.y - dy * 0.3,
         };
         velocity.current = { x: 0, y: 0 };
         requestAnimationFrame(updatePhysics);
@@ -85,11 +87,11 @@ export default function CustomCursor() {
       requestAnimationFrame(updatePhysics);
     };
 
-    window.addEventListener('mousemove', updateMouse);
+    window.addEventListener("mousemove", updateMouse);
     const animationFrame = requestAnimationFrame(updatePhysics);
 
     return () => {
-      window.removeEventListener('mousemove', updateMouse);
+      window.removeEventListener("mousemove", updateMouse);
       cancelAnimationFrame(animationFrame);
     };
   }, []);
@@ -97,7 +99,7 @@ export default function CustomCursor() {
   return (
     <>
       {/* Main cursor */}
-      <div 
+      <div
         ref={cursorRef}
         className="fixed pointer-events-none z-[999] top-0 left-0 -ml-[12px] -mt-[12px] custom-cursor-main"
       >
@@ -107,13 +109,11 @@ export default function CustomCursor() {
       </div>
 
       {/* Shadow cursor */}
-      <div 
+      <div
         ref={shadowRef}
         className="fixed pointer-events-none z-[998] top-0 left-0 -ml-[16px] -mt-[16px] custom-cursor-shadow"
       >
-        <div className="text-white text-[32px] italic opacity-70">
-          ✦
-        </div>
+        <div className="text-white text-[32px] italic opacity-70">✦</div>
       </div>
     </>
   );

@@ -1,60 +1,66 @@
-'use client'
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import FocusTrap from 'focus-trap-react'
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import FocusTrap from "focus-trap-react";
 
-export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+export default function Ethos({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   // Handle Escape key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
-  }, [onClose])
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
 
   // Add a state for tracking which slide we're on (0, 1, or 2)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Reset slide when modal closes
   useEffect(() => {
     if (!isOpen) {
-      setCurrentSlide(0)
+      setCurrentSlide(0);
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   // Add new useEffect for click detection
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      const modalContent = document.querySelector('.modal-content');
+      const modalContent = document.querySelector(".modal-content");
       const clickedElement = event.target as HTMLElement;
-      
+
       if (modalContent && !modalContent.contains(clickedElement) && isOpen) {
         onClose();
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
 
   // Add this near the top of your component
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' && currentSlide < 2) {
-        setCurrentSlide(curr => curr + 1);
+      if (e.key === "ArrowRight" && currentSlide < 2) {
+        setCurrentSlide((curr) => curr + 1);
       }
-      if (e.key === 'ArrowLeft' && currentSlide > 0) {
-        setCurrentSlide(curr => curr - 1);
+      if (e.key === "ArrowLeft" && currentSlide > 0) {
+        setCurrentSlide((curr) => curr - 1);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    
+    window.addEventListener("keydown", handleKeyDown);
+
     // Cleanup listener when component unmounts
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [currentSlide]); // Add currentSlide as dependency to check bounds correctly
 
@@ -63,29 +69,30 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
     info: {
       offset: { x: number; y: number };
       velocity: { x: number; y: number };
-    }
+    },
   ) => {
     const SWIPE_THRESHOLD = 50;
-    
+
     if (info.offset.x < -SWIPE_THRESHOLD && currentSlide < 2) {
-      setCurrentSlide(curr => curr + 1);
+      setCurrentSlide((curr) => curr + 1);
     } else if (info.offset.x > SWIPE_THRESHOLD && currentSlide > 0) {
-      setCurrentSlide(curr => curr - 1);
+      setCurrentSlide((curr) => curr - 1);
     }
   };
 
   const getSlideEmoji = (slideIndex: number) => {
-    switch(slideIndex) {
+    switch (slideIndex) {
       case 0:
         return (
-          <span 
+          <span
             className="text-3xl"
             style={{
-              backgroundImage: 'linear-gradient(135deg, #FF6B7A 45%, rgb(255, 127, 105) 55%)',
-              WebkitTextFillColor: 'transparent',
-              WebkitBackgroundClip: 'text',
-              display: 'inline-block',
-              filter: 'drop-shadow(0 0 8px rgba(255, 127, 105, 0.35))'
+              backgroundImage:
+                "linear-gradient(135deg, #FF6B7A 45%, rgb(255, 127, 105) 55%)",
+              WebkitTextFillColor: "transparent",
+              WebkitBackgroundClip: "text",
+              display: "inline-block",
+              filter: "drop-shadow(0 0 8px rgba(255, 127, 105, 0.35))",
             }}
           >
             ➰
@@ -110,28 +117,28 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/70"
           />
-          
+
           <FocusTrap focusTrapOptions={{ initialFocus: false }}>
             <motion.div
-              initial={{ 
-                opacity: 0, 
+              initial={{
+                opacity: 0,
                 scale: 0.98,
-                y: window.innerWidth <= 1024 ? 100 : 0
+                y: window.innerWidth <= 1024 ? 100 : 0,
               }}
-              animate={{ 
-                opacity: 1, 
+              animate={{
+                opacity: 1,
                 scale: 1,
-                y: 0
+                y: 0,
               }}
-              exit={{ 
-                opacity: 0, 
+              exit={{
+                opacity: 0,
                 scale: 0.98,
-                y: window.innerWidth <= 1024 ? 100 : 0
+                y: window.innerWidth <= 1024 ? 100 : 0,
               }}
-              transition={{ 
+              transition={{
                 type: "spring",
                 stiffness: 300,
-                damping: 30 
+                damping: 30,
               }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
@@ -143,7 +150,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                        font-inter touch-pan-y"
             >
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
-              
+
               <div className="relative text-white/90 lowercase font-inter">
                 <motion.div
                   key={`slide-emoji-${currentSlide}`}
@@ -156,37 +163,48 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 </motion.div>
 
                 <div className="space-y-0 lg:space-y-4">
-                  <motion.p 
+                  <motion.p
                     key={`slide-title-${currentSlide}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     className={`text-2xl md:text-3xl font-bold leading-relaxed ${
-                      currentSlide === 1 ? '' : 'mb-4'
+                      currentSlide === 1 ? "" : "mb-4"
                     }`}
                   >
-                    {currentSlide === 0 && "we believe simple, everyday rhythms can unite us."}
-                    {currentSlide === 1 && "guided by longevity science,"}
-                    {currentSlide === 2 && "a world where social brings energy, not exhaustion."}
+                    {currentSlide === 0 && (
+                      <span className="gradient-text">
+                        we believe simple, everyday rhythms can unite us.
+                      </span>
+                    )}
+                    {currentSlide === 1 && (
+                      <span className="gradient-text">
+                        guided by longevity science,
+                      </span>
+                    )}
+                    {currentSlide === 2 && (
+                      <span className="gradient-text">
+                        a world where social brings energy, not exhaustion.
+                      </span>
+                    )}
                   </motion.p>
-                  
-                  <motion.div 
+
+                  <motion.div
                     key={`slide-content-${currentSlide}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className={`${currentSlide === 1 ? '' : 'mt-4'}`}
+                    className={`${currentSlide === 1 ? "" : "mt-4"}`}
                   >
                     {currentSlide === 0 && (
                       <>
-                        <motion.p 
+                        <motion.p
                           key={`slide-title-${currentSlide}`}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           className="text-2xl md:text-3xl font-bold leading-relaxed"
-                        >
-                        </motion.p>
+                        ></motion.p>
                         <div className="space-y-1">
                           <p className="leading-relaxed text-white/80">
                             no need for grand plans or lengthy meetups.
@@ -197,17 +215,16 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                         </div>
                       </>
                     )}
-                    
+
                     {currentSlide === 1 && (
                       <>
-                        <motion.p 
+                        <motion.p
                           key={`slide-title-${currentSlide}`}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           className="text-2xl md:text-3xl font-bold leading-relaxed mb-0"
-                        >
-                        </motion.p>
+                        ></motion.p>
                         <div className="space-y-4">
                           <div>
                             <p className="leading-relaxed text-white/70">
@@ -216,14 +233,18 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                           </div>
 
                           <div className="mt-4">
-                            <p className="text-white/70">
-                              the data is clear -
-                            </p>
+                            <p className="text-white/70">the data is clear -</p>
                             <p className="leading-relaxed text-white/70">
-                              while our gatherings often revolve around abundant food, drinks, and late nights...
+                              while our gatherings often revolve around abundant
+                              food, drinks, and late nights...
                             </p>
                             <p className="leading-relaxed text-white/70 ml-6">
-                              we can shape <span className="text-white">a new culture, fundamentally rooted in our collective health</span>.
+                              we can shape{" "}
+                              <span className="text-white">
+                                a new culture, fundamentally rooted in our
+                                collective health
+                              </span>
+                              .
                             </p>
                           </div>
                         </div>
@@ -231,10 +252,9 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                     )}
 
                     {currentSlide === 2 && (
-                      <motion.p 
-                        className="text-base text-white/70"
-                      >
-                        if this vision moves you, <a 
+                      <motion.p className="text-base text-white/70">
+                        if this vision moves you,{" "}
+                        <a
                           href="mailto:hello@kineship.com"
                           className="text-white hover:text-white/70 transition-colors duration-200 border-b border-white/30 pb-1"
                         >
@@ -251,7 +271,7 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                       <div
                         key={dot}
                         className={`h-1 w-8 rounded-full transition-colors duration-200 ${
-                          currentSlide === dot ? 'bg-white' : 'bg-white/20'
+                          currentSlide === dot ? "bg-white" : "bg-white/20"
                         }`}
                       />
                     ))}
@@ -260,28 +280,44 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                   <div className="flex items-center gap-6">
                     {currentSlide > 0 && (
                       <motion.button
-                        onClick={() => setCurrentSlide(curr => curr - 1)}
+                        onClick={() => setCurrentSlide((curr) => curr - 1)}
                         className="text-white/60 hover:text-white transition-colors duration-200"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
                       >
-                        <svg className="w-8 h-8 rotate-90" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <svg
+                          className="w-8 h-8 rotate-90"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       </motion.button>
                     )}
 
                     {currentSlide < 2 && (
                       <motion.button
-                        onClick={() => setCurrentSlide(curr => curr + 1)}
+                        onClick={() => setCurrentSlide((curr) => curr + 1)}
                         className="text-white/60 hover:text-white transition-colors duration-200"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
                       >
-                        <svg className="w-8 h-8 rotate-[-90deg]" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <svg
+                          className="w-8 h-8 rotate-[-90deg]"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       </motion.button>
                     )}
@@ -298,9 +334,9 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 aria-label="close"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path 
-                    d="M1 1L13 13M1 13L13 1" 
-                    stroke="white" 
+                  <path
+                    d="M1 1L13 13M1 13L13 1"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                   />
@@ -311,5 +347,5 @@ export default function Ethos({ isOpen, onClose }: { isOpen: boolean, onClose: (
         </div>
       )}
     </AnimatePresence>
-  )
+  );
 }

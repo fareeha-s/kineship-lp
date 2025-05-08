@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        sage: '#94A187',
-        coral: '#FF6B6B',
+        sage: "#94A187",
+        coral: "#FF6B6B",
       },
       fontFamily: {
-        bricolage: ['Bricolage Grotesque', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        bricolage: ["Bricolage Grotesque", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
       // Remove or comment out the animation definition
       // animation: {
