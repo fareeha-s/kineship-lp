@@ -3,116 +3,120 @@ import { motion } from "framer-motion";
 // Desktop images
 import screen1 from "../assets/appscreens/browser/screen-1.png";
 import screen2c from "../assets/appscreens/browser/screen-2c.png";
-import screen3 from "../assets/appscreens/browser/screen-3.png";
-import screen4 from "../assets/appscreens/browser/screen-4.png";
-// Mobile images (same names, different path)
-import mobileScreen1 from "../assets/appscreens/mobile/screen-1.png";
-import mobileScreen2 from "../assets/appscreens/mobile/screen-2a.png";
+import screen3Browser from "../assets/appscreens/browser/screen-3.png"; // Renamed to avoid conflict if you name mobile screen-3.png
+import screen4Browser from "../assets/appscreens/browser/screen-4.png"; // Renamed to avoid conflict
+// Mobile images - new 3-image sequence
+import mobileScreen1 from "../assets/appscreens/mobile/screen-1.png"; 
+import mobileScreen2 from "../assets/appscreens/mobile/screen-2.png"; 
 import mobileScreen3 from "../assets/appscreens/mobile/screen-3.png";
-import mobileScreen4 from "../assets/appscreens/mobile/screen-4.png";
+// Comment out or remove experimental image imports
+// import newMobileScreen1_v2 from "../assets/appscreens/mobile/Group 108.png";
+// import newMobileScreen2_v2 from "../assets/appscreens/mobile/Group 109.png";
 
-const desktopScreenshots = [screen1, screen2c, screen3, screen4];
+const desktopScreenshots = [screen1, screen2c, screen3Browser, screen4Browser];
+// Use new 3-image sequence for mobile
 const mobileScreenshots = [
-  mobileScreen1,
-  mobileScreen2,
+  mobileScreen1, 
+  mobileScreen2, 
   mobileScreen3,
-  mobileScreen4,
 ];
 
-export default function AppScreenshots() {
-  const [currentIndex, setCurrentIndex] = useState(-1); // Start with nothing showing
-  const [hasStarted, setHasStarted] = useState(false); // Track if we've started the sequence
-  const [isMobile, setIsMobile] = useState(false);
+interface AppScreenshotsProps {
+  onSecondImageLoaded: () => void;
+}
 
-  // Initial delay to sync with main question
-  useEffect(() => {
-    const initialDelay = setTimeout(() => {
-      setCurrentIndex(0); // Show first slide
-      setHasStarted(true); // Mark that we've started
-    }, 800); // Appears right after main question (which shows at 0.6s)
+// Helper function to check mobile status, can be outside component if it doesn't rely on component props/state
+const getIsMobile = () => {
+  if (typeof window === "undefined") return false; // For SSR or non-browser environments
+  return (
+    window.matchMedia("(max-width: 1024px)").matches ||
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches
+  );
+};
 
-    return () => clearTimeout(initialDelay);
-  }, []);
+export default function AppScreenshots({ onSecondImageLoaded }: AppScreenshotsProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasStarted, setHasStarted] = useState(true);
+  const [isMobile, setIsMobile] = useState(getIsMobile());
 
-  // Main interval for transitions
   useEffect(() => {
     if (hasStarted) {
       const timer = setInterval(
         () => {
           setCurrentIndex(
-            (current) =>
-              (current + 1) %
-              (isMobile ? mobileScreenshots.length : desktopScreenshots.length),
+            (current) => {
+              const nextIndex = (current + 1) % (isMobile ? mobileScreenshots.length : desktopScreenshots.length);
+              if (isMobile && nextIndex === 1) {
+                onSecondImageLoaded();
+              }
+              if (!isMobile && nextIndex === 1) {
+                // onSecondImageLoaded(); // Desktop logic if needed, currently App.tsx handles desktop AppScreenshot container timing
+              }
+              return nextIndex;
+            }
           );
         },
         isMobile
           ? currentIndex === 0
-            ? 2000 // Slide 1: 2s
-            : currentIndex === 1
-              ? 3000 // Slide 2: 3s
-              : currentIndex === 2
-                ? 3500 // Slide 3: 3.5s
-                : 3500 // Slide 4: 3.5s
+            ? 1000 // Mobile Image 1 (index 0) duration
+            : currentIndex === 1 
+              ? 2800 // Mobile Image 2 (index 1) duration - Synced with "the kineship app shares..." text
+              : 3000 // Mobile Image 3 (index 2) duration (and any subsequent if array grows)
           : currentIndex === 0
-            ? 2000 // screen-1: shorter now
+            ? 2000 // Desktop Image 1 duration
             : currentIndex === 1
-              ? 2500 // screen-2c: same as before
-              : 4500, // screen-3 and screen-4: longer
+              ? 2500 // Desktop Image 2 duration
+              : 4500, // Desktop subsequent images duration
       );
-
       return () => clearInterval(timer);
     }
-  }, [isMobile, currentIndex, hasStarted]);
+  }, [isMobile, currentIndex, hasStarted, onSecondImageLoaded]);
 
+  // Effect to update isMobile on resize
   useEffect(() => {
-    const checkMobile = () => {
-      const isMobileDevice =
-        window.matchMedia("(max-width: 1024px)").matches ||
-        window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-      setIsMobile(isMobileDevice);
+    const handleResize = () => {
+      setIsMobile(getIsMobile());
     };
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty dependency array, runs once on mount and cleans up on unmount
+
+  // Determine current screenshots array based on isMobile state
+  const currentScreenshots = isMobile ? mobileScreenshots : desktopScreenshots;
 
   return (
     <div
       className={`relative [transform:translateZ(0)] ${isMobile ? "h-[350px]" : "h-[510px]"} overflow-hidden`}
     >
-      <img
-        src={isMobile ? mobileScreenshots[0] : desktopScreenshots[0]}
-        alt=""
-        className="invisible"
-        aria-hidden="true"
-        style={{ imageRendering: "crisp-edges" }}
-      />
+      {/* Placeholder image for layout, using the determined currentScreenshots array */}
+      {currentScreenshots.length > 0 && (
+        <img
+          src={currentScreenshots[0]}
+          alt=""
+          className="invisible"
+          aria-hidden="true"
+          // style={{ imageRendering: "crisp-edges" }} // Removed for testing
+        />
+      )}
 
       <div className="absolute top-0 left-0 right-0">
-        {(isMobile ? mobileScreenshots : desktopScreenshots).map(
-          (screenshot, index) => (
-            <motion.img
-              key={index}
-              src={screenshot}
-              alt={`App Screenshot ${index + 1}`}
-              className={`rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center w-full ${
-                isMobile ? "h-[350px]" : "h-[510px]"
-              } object-contain mix-blend-normal`}
-              style={{ imageRendering: "crisp-edges" }}
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: index === currentIndex ? 1 : 0,
-              }}
-              transition={{
-                duration: 1.5, // Increased from whatever it was before
-                ease: "easeInOut",
-              }}
-            />
-          ),
-        )}
+        {currentScreenshots.map((screenshot, index) => (
+          <motion.img
+            key={`${isMobile}-${index}`} // Key change to force re-render if isMobile changes
+            src={screenshot}
+            alt={`App Screenshot ${index + 1}`}
+            className={`rounded-[20px] shadow-2xl absolute top-0 left-0 origin-center w-full ${
+              isMobile ? "h-[350px]" : "h-[510px]"
+            } object-contain mix-blend-normal`}
+            // style={{ imageRendering: "crisp-edges" }} // Removed for testing
+            initial={{ opacity: index === 0 ? 1 : 0 }}
+            animate={{
+              opacity: index === currentIndex ? 1 : 0,
+            }}
+            transition={isMobile ? { duration: 0.6, ease: "easeInOut" } : { duration: 0.8, ease: "easeInOut" }}
+          />
+        ))}
       </div>
     </div>
   );

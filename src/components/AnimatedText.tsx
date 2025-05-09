@@ -13,6 +13,21 @@ export const AnimatedText = ({
 }: AnimatedTextProps) => {
   const words = text.split(" ");
 
+  // Special case for "Make fitness..." to match AppScreenshots container animation
+  if (text === "Make fitness the foundation of your social life.") {
+    return (
+      <span
+        style={{
+          display: "inline-block", // Ensures it behaves as a block for animation
+          opacity: 0,
+          animation: `fadeInSimple 1.5s cubic-bezier(0.42, 0, 0.58, 1) ${delay * 1000}ms forwards`,
+        }}
+      >
+        {text}
+      </span>
+    );
+  }
+
   // Special case for the question/statement
   if (text === "What if fitness was the foundation of your social life?") {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
@@ -76,7 +91,6 @@ export const AnimatedText = ({
     return (
       <>
         {words.map((word, wordIndex) => {
-          // Check if the word contains emojis
           if (word.includes("💪") || word.includes("✨")) {
             return (
               <span
@@ -86,7 +100,7 @@ export const AnimatedText = ({
                   opacity: 0,
                   animation:
                     type === "fluid"
-                      ? `fadeInFluid 2s cubic-bezier(0.2, 0.6, 0.2, 1) ${delay * 1000 + wordIndex * 80}ms forwards`
+                      ? `fadeInFluid 2.5s cubic-bezier(0.42, 0, 0.58, 1) ${delay * 1000 + wordIndex * 100}ms forwards`
                       : `fadeInSimple 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) ${delay * 1000 + wordIndex * 60}ms forwards`,
                 }}
               >
@@ -94,8 +108,6 @@ export const AnimatedText = ({
               </span>
             );
           }
-
-          // Regular words get letter by letter
           return (
             <span
               key={wordIndex}
@@ -110,7 +122,7 @@ export const AnimatedText = ({
                     opacity: 0,
                     animation:
                       type === "fluid"
-                        ? `fadeInFluid 2s cubic-bezier(0.2, 0.6, 0.2, 1) ${delay * 1000 + wordIndex * 80 + letterIndex * 15}ms forwards`
+                        ? `fadeInFluid 2.5s cubic-bezier(0.42, 0, 0.58, 1) ${delay * 1000 + wordIndex * 100 + letterIndex * 20}ms forwards`
                         : `fadeInSimple 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) ${delay * 1000 + wordIndex * 60 + letterIndex * 12}ms forwards`,
                   }}
                 >

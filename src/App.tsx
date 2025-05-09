@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "@fontsource/bricolage-grotesque";
 import "@fontsource/inter";
 import WaitlistForm from "./components/WaitlistForm";
@@ -7,9 +7,39 @@ import SocialLinks from "./components/SocialLinks";
 import { AnimatedText } from "./components/AnimatedText";
 import CustomCursor from "./components/CustomCursor";
 import Ethos from "./components/Ethos";
+import { motion } from "framer-motion";
 
 function App() {
   const [isEthosOpen, setIsEthosOpen] = useState(false);
+  const [secondImageLoaded, setSecondImageLoaded] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      setFontLoaded(true);
+    });
+
+    const checkScreenSize = () => {
+      const isSmall = window.matchMedia("(max-width: 1024px)").matches || 
+                      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+      setIsSmallScreen(isSmall);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  const commonTransition = {
+    duration: 0.8,
+    ease: [0.16, 1, 0.3, 1],
+  };
+
+  const mobileCommonTransition = {
+    duration: 0.6,
+    ease: "easeInOut",
+  };
 
   return (
     <div className="relative min-h-screen min-h-[-webkit-fill-available] font-inter pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
@@ -23,10 +53,10 @@ function App() {
               <h1 className="hidden lg:block font-bricolage text-8xl font-bold mb-8 tracking-tight">
                 <div
                   style={{
-                    opacity: 0,
-                    animation:
-                      "slideInFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-                    animationDelay: "0.1s",
+                    opacity: fontLoaded ? 1 : 0,
+                    animation: fontLoaded
+                      ? "slideInFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards"
+                      : "none",
                     willChange: "transform",
                     backfaceVisibility: "hidden",
                   }}
@@ -38,27 +68,25 @@ function App() {
               </h1>
 
               <div
-                className="lg:hidden mb-8"
+                className="lg:hidden mb-3"
                 style={{
                   opacity: 0,
                   animation:
                     "fadeInSimple 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                   animationDelay: "0.1s",
-                  transform: "scale(0.85)",
                   marginTop: "-20px",
-                  marginBottom: "20px"
                 }}
               >
-                <AppScreenshots />
+                <AppScreenshots onSecondImageLoaded={() => setSecondImageLoaded(true)} />
               </div>
 
               <h1 className="block lg:hidden font-bricolage text-7xl md:text-7xl font-bold mb-3 tracking-tight text-center">
                 <div
                   style={{
-                    opacity: 0,
-                    animation:
-                      "slideInFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-                    animationDelay: "0.7s",
+                    opacity: fontLoaded ? 1 : 0,
+                    animation: fontLoaded 
+                      ? "slideInFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards"
+                      : "none",
                     willChange: "transform",
                     backfaceVisibility: "hidden",
                   }}
@@ -71,67 +99,57 @@ function App() {
 
               <p className="text-[5.5vw] md:text-4xl font-semibold text-white mb-8 leading-tight">
                 <span className="hidden md:inline">
-                  <AnimatedText
-                    text="Make fitness the foundation of your social life."
-                    delay={0.6}
-                    type="simple"
-                  />
+                  {fontLoaded && (
+                    <AnimatedText
+                      text="Make fitness the foundation of your social life."
+                      delay={0.3}
+                      type="simple"
+                    />
+                  )}
                 </span>
                 <span className="md:hidden">
                   <AnimatedText
                     text="from studio to squad"
-                    delay={1.3}
+                    delay={secondImageLoaded ? 0.2 : 9999}
                     type="fluid"
                   />
                 </span>
               </p>
 
-              <div className="lg:hidden mb-8">
-                <div
-                  style={{
-                    opacity: 0,
-                    animation: "fadeInSimple 0.8s ease forwards",
-                    animationDelay: "2.0s",
-                  }}
-                >
-                  <WaitlistForm />
-                </div>
-              </div>
+              <motion.div
+                className="lg:hidden mb-8"
+                initial={{ opacity: 0 }}
+                animate={secondImageLoaded ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ ...mobileCommonTransition, delay: 0.8 }}
+              >
+                <WaitlistForm delay={0.1} />
+              </motion.div>
 
               <div className="lg:hidden space-y-6 text-lg md:text-xl text-white/80 leading-relaxed lowercase text-center px-6 md:px-0">
                 <p className="text-white/90">
                   <AnimatedText
                     text="the kineship app shares your workout calendar with your circles."
-                    delay={3.0}
+                    delay={secondImageLoaded ? 2.8 : 9999}
                     type="simple"
                   />
                 </p>
-
                 <p className="text-base md:text-lg text-white/80">
                   <AnimatedText
                     text="your runs. your reps. your reformer/boxing/spin/HIIT/yoga class—"
-                    delay={4.2}
+                    delay={secondImageLoaded ? 3.4 : 9999}
                     type="simple"
                   />
                   <AnimatedText
-                    text="you're already going, "
-                    delay={4.8}
-                    type="simple"
-                  />
-                  <AnimatedText
-                    text="turn your schedule into an invite"
-                    delay={5.2}
+                    text="you're already going, turn your schedule into an invite"
+                    delay={secondImageLoaded ? 4.0 : 9999}
                     type="simple"
                   />
                 </p>
-
-                <div
-                  style={{
-                    opacity: 0,
-                    animation: "fadeInSimple 0.8s ease forwards",
-                    animationDelay: "6.0s",
-                  }}
+                <motion.div
                   className="mt-2"
+                  initial={{ opacity: 0 }}
+                  animate={secondImageLoaded ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ ...mobileCommonTransition, delay: 4.8 }}
                 >
                   <div className="flex justify-center">
                     <SocialLinks
@@ -139,83 +157,84 @@ function App() {
                       className="relative z-50"
                     />
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               <div className="hidden lg:block space-y-6 text-lg md:text-xl text-white/80 leading-relaxed lowercase text-left">
                 <p className="text-white/90">
-                  <AnimatedText
-                    text="the kineship app shares your workout calendar with your circles."
-                    delay={2.4}
-                    type="simple"
-                  />
+                  {fontLoaded && (
+                    <AnimatedText
+                      text="the kineship app shares your workout calendar with your circles."
+                      delay={2.0}
+                      type="simple"
+                    />
+                  )}
                   <br />
                   <span className="font-bold">
-                    <AnimatedText
-                      text="from studio to squad"
-                      delay={2.8}
-                      type="fluid"
-                    />
+                    {fontLoaded && (
+                      <AnimatedText
+                        text="from studio to squad"
+                        delay={2.4}
+                        type="fluid"
+                      />
+                    )}
                   </span>
                 </p>
                 <p className="text-base md:text-lg text-white/80">
-                  <AnimatedText
-                    text="your runs. your reps. your reformer/boxing/spin/HIIT/yoga class—"
-                    delay={3.6}
-                    type="simple"
-                  />
-                  <AnimatedText
-                    text="you're already going, "
-                    delay={3.8}
-                    type="simple"
-                  />
-                  <AnimatedText
-                    text="turn your schedule into an invite"
-                    delay={4.0}
-                    type="simple"
-                  />
+                  {fontLoaded && (
+                    <>
+                      <AnimatedText
+                        text="your runs. your reps. your reformer/boxing/spin/HIIT/yoga class—"
+                        delay={2.8}
+                        type="simple"
+                      />
+                      <AnimatedText
+                        text="you're already going, turn your schedule into an invite"
+                        delay={3.2}
+                        type="simple"
+                      />
+                    </>
+                  )}
                 </p>
               </div>
 
               <div className="hidden lg:block mt-6 space-y-8">
-                <div
-                  style={{
-                    opacity: 0,
-                    animation: "fadeInSimple 0.8s ease forwards",
-                    animationDelay: "4.2s",
-                  }}
-                >
-                  <WaitlistForm />
-                </div>
-
-                <div
-                  style={{
-                    opacity: 0,
-                    animation: "fadeInSimple 0.8s ease forwards",
-                    animationDelay: "4.4s",
-                  }}
-                >
-                  <div className="flex flex-col items-center lg:items-start gap-4">
-                    <SocialLinks
-                      onEthosClick={() => setIsEthosOpen(true)}
-                      className="relative z-50"
-                    />
-                  </div>
-                </div>
+                {fontLoaded && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ ...commonTransition, delay: 3.8 }}
+                  >
+                    <WaitlistForm delay={0.2} isSmallScreen={isSmallScreen} />
+                  </motion.div>
+                )}
+                {fontLoaded && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ ...commonTransition, delay: 5.0 }}
+                  >
+                    <div className="flex flex-col items-center lg:items-start gap-4">
+                      <SocialLinks
+                        onEthosClick={() => setIsEthosOpen(true)}
+                        className="relative z-50"
+                      />
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </div>
 
-            <div
-              className="hidden lg:flex flex-1 justify-center items-center max-w-lg"
-              style={{
-                opacity: 0,
-                animation:
-                  "fadeInSimple 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-                animationDelay: "1.4s",
-              }}
-            >
-              <AppScreenshots />
-            </div>
+            {fontLoaded && (
+              <motion.div
+                className="hidden lg:flex flex-1 justify-center items-center max-w-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
+              >
+                <AppScreenshots onSecondImageLoaded={() => setSecondImageLoaded(true)} />
+              </motion.div>
+            )}
           </div>
         </div>
       </main>

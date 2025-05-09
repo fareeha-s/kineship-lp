@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkle, Confetti } from "phosphor-react";
+import { motion } from "framer-motion";
 
-export default function WaitlistForm() {
+interface WaitlistFormProps {
+  // optional additional delay before the form fades in
+  delay?: number;
+  isSmallScreen?: boolean;
+}
+
+export default function WaitlistForm({ delay = 2.0, isSmallScreen = false }: WaitlistFormProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setIsIOS(isIOSDevice);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,28 +53,53 @@ export default function WaitlistForm() {
     }
   };
 
+  const placeholderColorClass = isIOS ? "placeholder-neutral-400" : "placeholder-white/60";
+  const borderColorClass = isIOS ? "border-neutral-300/75" : "border-white/20";
+
   return (
-    <form
+    <motion.form
       onSubmit={handleSubmit}
       className="w-full max-w-xs mx-auto lg:mx-0"
     >
       <div className="relative group">
-        <div className="absolute -inset-1 bg-gradient-to-r from-[#FF6B7A]/30 to-sage/30 rounded-[14px] blur-lg group-hover:blur-xl transition-all duration-300"></div>
-        <input
+        {!isIOS && !isSmallScreen && (
+          <motion.div
+            className="absolute -inset-1 rounded-[14px] bg-gradient-to-r from-[#FF6B7A]/30 to-sage/30 blur-lg group-hover:blur-xl transition-shadow duration-300 ease-in-out"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.16, 1, 0.3, 1],
+              delay
+            }}
+            style={{ willChange: 'transform, opacity, filter' }}
+          />
+        )}
+        <motion.input
           type="email"
           value={
             status === "success" ? "you're in." : email
           }
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your email here →"
-          className="w-full px-5 py-3.5 bg-black/30 rounded-[12px] border border-white/20 
-            text-white placeholder-white/60 focus:outline-none focus:ring-2 
+          className={`w-full px-5 py-3.5 bg-black/30 rounded-[12px] border ${borderColorClass} 
+            text-white ${placeholderColorClass} focus:outline-none focus:ring-2 
             focus:ring-white/30 transition-all backdrop-blur-sm
             [&:-webkit-autofill]:!text-white group-hover:border-white/30
-            [&:-webkit-autofill]:shadow-[0_0_0_30px_rgb(59_130_246_/_0.15)_inset]"
+            [&:-webkit-autofill]:shadow-[0_0_0_30px_rgb(59_130_246_/_0.15)_inset]`}
           required
           disabled={status === "loading" || status === "success"}
-          style={{ color: status === "success" ? "#D1E1FD" : "white" }}
+          style={{ 
+            color: status === "success" ? "#D1E1FD" : "white",
+            willChange: 'transform, opacity'
+          }}
+          initial={{ scale: 0.98, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            delay
+          }}
         />
         <button
           type="submit"
@@ -84,6 +123,6 @@ export default function WaitlistForm() {
       <p className="text-white/50 text-xs mt-2 text-center lg:text-left">
         {status === "success" ? "see you on launch day!" : "sign up for day one access"}
       </p>
-    </form>
+    </motion.form>
   );
 }
